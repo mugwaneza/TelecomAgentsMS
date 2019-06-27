@@ -1,0 +1,66 @@
+@main_dashboard("TAMS" ) {
+
+    @views.html.navigation()
+
+
+    <div class="content-wrapper py-3">
+        <div class="container-fluid">
+            <div class="row trak_map_page">
+                <div class="page-header" style="background-image: url('@routes.Assets.at("images/vehicle3.jpg")')">
+
+                    <div class="container">
+                    <div class="col-md-12"><br>
+
+                        <h1 class="text-success">REGISTER RWANDA PROVINCE</h1>
+
+
+                        <form class="col-sm-offset-2" action="/dashboard/province/create" id="RegisterAdmin-form" method="POST" >
+
+
+
+                            <div class="form-group row  ">
+                                <div class="col-sm-10">
+                                    <input
+                                    name="province"
+                                    id="province"
+                                    class="form-control"
+                                    type="text"
+                                    placeholder="Enter province name">
+                                </div>
+                            </div>
+                            <div class="form-group row  ">
+                                <div class="col-sm-10">
+                                    <input
+                                    name="description"
+                                    id="description"
+                                    class="form-control"
+                                    type="text"
+                                    placeholder="Enter province description">
+                                </div>
+                            </div>
+
+
+                            <div class=" form-group col-md-offset-4  ">
+                                <input type="submit" class="btn btn-primary " value="Submit">
+                            </div>
+                        </form>
+
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!-- /.container-fluid -->
+    </div>
+        <!-- /.content-wrapper -->
+
+    <a class="scroll-to-top rounded" href="#">
+        <i class="fa fa-chevron-up"></i>
+    </a>
+
+    <script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC_7OucfzhqVC8ic_RPW0jPy-55OE0y-ZA&sensor=false&libraries=places">
+    </script>
+
+}
