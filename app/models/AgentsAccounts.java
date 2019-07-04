@@ -6,6 +6,7 @@ import play.db.ebean.Model;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "agents")
@@ -33,4 +34,33 @@ public class AgentsAccounts extends Model {
 
     public Timestamp Created_at = new Timestamp(new Date().getTime());
 
+   public static Finder<Long,AgentsAccounts> FindAgent = new Finder<Long, AgentsAccounts>(Long.class, AgentsAccounts.class);
+
+    public static  AgentsAccounts isEmailExist(String email){
+
+        return FindAgent.where().eq("email", email).findUnique();
+    }
+
+    public static AgentsAccounts authenticate(String email, String password) {
+        return FindAgent.where()
+                .eq("email", email)
+                .eq("password", password)
+                .findUnique();
+
+    }
+
+
+//    public  static boolean sd(){
+//
+//        List<AgentsAccounts> tasks = (List<AgentsAccounts>) FindAgent.where()
+//                .ilike("name", "%coco%")
+//                .orderBy("dueDate asc");
+//
+//         if (tasks.isEmpty()){
+//             return false;
+//          }else{
+//             return true;
+//         }
+//
+//    }
 }

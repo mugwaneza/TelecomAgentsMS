@@ -3,7 +3,7 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
+GET    /                           controllers.Application.index()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
@@ -16,8 +16,17 @@ GET     /dashboard/cell       controllers.AdminDashboard.DashboardCell()
 GET     /manage/accounts       controllers.AdminDashboard.DashboardAdminAccounts()
 
 
+GET     /signup/agent                controllers.Application.agentSignup()
+GET     /signin/agent                controllers.Application.agentSingin()
+
+
 POST    /dashboard/province/create        controllers.AdminDashboard.DashboardCreateProvince()
 POST    /dashboard/district/create        controllers.AdminDashboard.DashboardCreateDistrict()
 POST    /dashboard/sector/create        controllers.AdminDashboard.DashboardCreateSector()
 POST    /dashboard/cell/create        controllers.AdminDashboard.DashboardCreateCell()
+
+
+POST     /signup/agent/create                controllers.Application.agentSignupCreate()
+POST     /signin/agent/create                controllers.Application.agentSigninCreate()
+
 

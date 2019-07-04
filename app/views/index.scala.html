@@ -1,65 +1,5 @@
-@(message: String)
-@main("Welcome to Play") {
-    <!--==========================
-  Header
-  ============================-->
-<header id="header">
-
-    <div id="topbar">
-        <div class="container">
-            <div class="social-links">
-                <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-                <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-                <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
-                <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-
-        <div class="logo float-left">
-                <!-- Uncomment below if you prefer to use an image logo -->
-            <h1 class="text-light"><a href="#intro" class="scrollto"><span>TAN MIS</span></a></h1>
-                <!-- <a href="#header" class="scrollto"><img src="img/logo.png" alt="" class="img-fluid"></a> -->
-        </div>
-
-        <nav class="main-nav float-right d-none d-lg-block">
-            <ul>
-                <li class="active"><a href="#intro">Home</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#services">Services</a></li>
-
-                <li><a href="#footer">Contact Us</a></li>
-            </ul>
-        </nav><!-- .main-nav -->
-
-    </div>
-</header><!-- #header -->
-
-    <!--==========================
-    Intro Section
-  ============================-->
-<section id="intro" class="clearfix">
-    <div class="container d-flex h-100">
-        <div class="row justify-content-center align-self-center">
-            <div class="col-md-6 intro-info order-md-first order-last">
-                <h2>Telecom Agent <br>Network <span>Management Information System!</span></h2>
-                <div>
-                    <a href="#about" class="btn-get-started scrollto">Start Application</a>
-                    <a href="#about" class="btn-get-started scrollto">Access Your Ycount</a>
-                </div>
-            </div>
-
-            <div class="col-md-6 intro-img order-md-last order-first">
-                <img src="@routes.Assets.at("images/intro-img.svg")" alt="" class="img-fluid">
-            </div>
-        </div>
-
-    </div>
-</section><!-- #intro -->
-
-<main id="main">
+ @main("Welcome to TAMS" ) {
+@indexheader()
         <!--==========================
       About Us Section
     ============================-->
@@ -77,13 +17,13 @@
                 <div class="col-lg-7 col-md-6">
                     <div class="about-content">
                         <h2>About Us</h2>
-                        <h3>Telecom Agent Network Management Information System</h3>
+                        <h3>Telecom Agent Management System</h3>
                         <p>We are Rwanda Telecommunication companies who decided to work together but with separate services for the purpose of satisfying our clients in their daily needs</p>
 
                         <ul>
                             <li><i class="ion-android-checkmark-circle"></i>We care about you</li>
                             <li><i class="ion-android-checkmark-circle"></i>Ask we shall reply because we are your servents</li>
-                            <li><i class="ion-android-checkmark-circle"></i>Don't miss the use of TAN MIS for your acknowledgement in our company</li>
+                            <li><i class="ion-android-checkmark-circle"></i>Don't miss the use of TAMS for your acknowledgement in our company</li>
                         </ul>
                     </div>
                 </div>
@@ -96,45 +36,12 @@
     <!--==========================
       Services Section
     ============================-->
-    <section id="services" class="section-bg">
-        <div class="container">
 
-            <header class="section-header">
-                <h3>Services</h3>
-                <p>Telecom Agent Network Management Information System thinks about you and does everything to improve the qualiity of the services offers you. </p>
-            </header>
+@index_service_section()
 
-            <div class="row">
-
-
-                <div class="col-md-6 col-lg-4 wow bounceInUp" data-wow-duration="1.4s">
-                    <div class="box">
-                        <div class="icon" style="background: #fceef3;"><i class="ion-ios-world-outline" style="color: #ff689b;"></i></div>
-                        <h4 class="title"><a href="">Mapping Agents</a></h4>
-                        <p class="description">Our system allocates agents in different site where they can meet with their can face the public for selling airtime or for mobile emoney transaction</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 wow bounceInUp" data-wow-duration="1.4s">
-                    <div class="box">
-                        <div class="icon" style="background: #fff0da;"><i class="ion-ios-bookmarks-outline" style="color: #e98e06;"></i></div>
-                        <h4 class="title"><a href="">Registration</a></h4>
-                        <p class="description">Registration of new agent to desired Telecom company when He/She needs to start the telecom business everywhere in different districts of Rwanda</p>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
-                    <div class="box">
-                        <div class="icon" style="background: #e6fdfc;"><i class="ion-ios-paper-outline" style="color: #3fcdc7;"></i></div>
-                        <h4 class="title"><a href="">Agent Support</a></h4>
-                        <p class="description">We provide a quick support to our agents because are them our core link to the end client and are they satnd inbehalf of us in terms of services</p>
-                    </div>
-                </div>
-
-
-            </div>
-
-        </div>
-    </section><!-- #services -->
+@*      Signup/Signin Section*@
+@*    ============================-->*@
+  @signin_signup_model()
 
 </main>
     }

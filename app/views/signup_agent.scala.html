@@ -1,0 +1,64 @@
+@(message: String)
+@main("signup"){
+@indexheader()
+
+    <section id="singupform">
+    <div class="container">
+            <div class="row">
+
+    <form class="form mt-3 col-md-6 offset-3" method="post" action="/signup/agent/create" autocomplete="off" id="agentsigupform">
+
+        <h2>Fill signup Form</h2>
+
+        @if(message == "error") {
+            <div class="alert alert-danger col-md-8 offset-1" role="alert">
+            @flash.get("error")
+            </div>
+
+        }
+        @if(message=="success"){
+
+            <div class="alert alert-success col-md-8 offset-1" role="alert">
+            @flash.get("success")
+            </div>
+        }
+    <div class="form-group">
+        <input type="text" class="form-control" name="names" placeholder="Enter full name" id="names">
+    </div>
+        <div class="form-group">
+
+            <label>Female
+            <input type="radio" name="gender" class="" value="Female" id="">
+            </label>
+            <label>Male
+            <input type="radio" name="gender" class="" value="Male" id="">
+            </label>
+        </div>
+        <div class="form-group">
+    <input type="text" class="form-control" placeholder="Email" name="email" id="email">
+        </div>
+        <div class="form-group">
+        <input type="password" class="form-control" name="password" placeholder="password" id="password">
+        </div>
+
+        <div class="form-group">
+            <input type="submit" class="btn btn-dark form-control" value="Submit">
+        </div>
+
+         </form>
+
+
+
+        </div>
+    </div>
+    </section>
+
+    @*      Signup/Signin Section*@
+    @*    ============================-->*@
+
+    @signin_signup_model()
+
+
+    </main>
+
+}

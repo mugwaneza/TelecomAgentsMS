@@ -36,4 +36,6 @@ public class ApprovedAgents extends Model {
 
     public Timestamp approved_at = new Timestamp(new Date().getTime());
 
+
+
 }
