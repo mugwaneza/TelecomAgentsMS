@@ -1,4 +1,6 @@
 
+// Register cell form
+
 $('#cellform').validate({
     rules : {
         sector : {
@@ -14,6 +16,65 @@ $('#cellform').validate({
 
     }
 });
+
+
+// Register Sector
+$('#sectorform').validate({
+    rules : {
+        district : {
+            required : true,
+        },
+        stector :{
+            required : true,
+         },
+
+       description :{
+            required : true,
+         },
+
+    }
+});
+
+
+
+
+// Register district
+
+$('#districtform').validate({
+    rules : {
+        province : {
+            required : true,
+        },
+        district :{
+            required : true,
+         },
+
+       description :{
+            required : true,
+         },
+
+    }
+});
+
+
+// Register district
+
+$('#provinceform').validate({
+    rules : {
+        province : {
+            required : true,
+        },
+        description :{
+            required : true,
+        },
+
+    }
+});
+
+
+
+
+
 
 
 $('#login-form').validate({

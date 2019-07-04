@@ -34,4 +34,10 @@ public class Province extends Model {
     public static List<Province> findProvince() {
         return InfoProvinces.all();
     }
+
+
+       public static Province isProvinceExist(String province) {
+        return  InfoProvinces.where()
+                .eq("province",province).findUnique();
+    }
 }

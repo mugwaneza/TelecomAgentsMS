@@ -1,3 +1,4 @@
+@(message: String)
 @main_dashboard("TAMS" ) {
 
     @views.html.navigation()
@@ -14,9 +15,20 @@
                         <h1 class="text-success">REGISTER RWANDA PROVINCE</h1>
 
 
-                        <form class="col-sm-offset-2" action="/dashboard/province/create" id="RegisterAdmin-form" method="POST" >
+                        <form class="col-sm-offset-2" action="/dashboard/province/create" id="provinceform" method="POST" >
 
+                            @if(message == "error") {
+                                <div class="alert alert-danger col-md-8 offset-1" role="alert">
+                                @flash.get("error")
+                                </div>
 
+                            }
+                            @if(message=="success"){
+
+                                <div class="alert alert-success col-md-8 offset-1" role="alert">
+                                @flash.get("success")
+                                </div>
+                            }
 
                             <div class="form-group row  ">
                                 <div class="col-sm-10">

@@ -35,4 +35,9 @@ public class Sector extends Model {
     public static List<Sector> findSectors() {
         return InfoSectors.all();
     }
+
+       public static Sector isSectorExist(String sector) {
+        return  InfoSectors.where()
+                .eq("sector",sector).findUnique();
+    }
 }

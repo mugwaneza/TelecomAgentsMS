@@ -37,4 +37,12 @@ public class District extends Model {
         return InfoDistricts.all();
     }
 
+      public static District isDistrictExist(String district) {
+        return  InfoDistricts.where()
+                .eq("district",district).findUnique();
+    }
+
+
+
+
 }
