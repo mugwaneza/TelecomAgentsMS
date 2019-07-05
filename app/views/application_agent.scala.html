@@ -1,0 +1,189 @@
+@(message: String )
+@main_dashboard("application" ) {
+    @views.html.navigation()
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <div class="row ">
+                <div class="page-header" style="background-image: url('@routes.Assets.at("images/vehicle3.jpg")')">
+
+                    <div class="container">
+                        <div class="col-md-10"><br>
+
+                    <form class=" mt-5" action="/dashboard/district/create"  method="POST" id="districtform" >
+
+                                <h1 class="text-primary">For the complete application fill the following form </h1>
+
+                                @if(message == "error") {
+                                    <div class="alert alert-danger col-md-8  offset-1" role="alert">
+                                    @flash.get("error")
+                                    </div>
+
+                                }
+                                @if(message=="success"){
+
+                                    <div class="alert alert-success col-md-8 offset-1" role="alert">
+                                    @flash.get("success")
+                                    </div>
+                                }
+                                <div class="row">
+                                <div class=" col-md-6">
+                                <div class="form-group   ">
+                                        <select  name="district" class="form-control">
+                                            <option value=""> -- select district -- </option>
+                                            @for(i <- District.findDistrict()) {
+                                                <option value="@i.id">@i.district</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                <div class="form-group   ">
+                                        <select  name="sector" class="form-control">
+                                            <option value=""> -- select sector -- </option>
+                                            @for(i <- Sector.findSectors()) {
+                                                <option value="@i.id">@i.sector</option>
+                                            }
+                                        </select>
+                                </div>
+                                </div>
+                                </div>
+
+                                   <div class="row">
+                                   <div class="form-group col-md-6  ">
+                                        <select  name="cell" class="form-control">
+                                            <option value=""> -- select cell -- </option>
+                                            @for(i <- Cell.findCells()) {
+                                                <option value="@i.id">@i.cell</option>
+                                            }
+                                        </select>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                        <input
+                                        name="agglomeration"
+                                        id="agglomeration"
+                                        class="form-control"
+                                        type="text"
+                                        placeholder="Enter agglomeration name">
+                                </div>
+                                   </div>
+
+                        <div class="row">
+                              <div class="form-group col-md-6  ">
+                                        <input
+                                        name="firstname"
+                                        id=""
+                                        class="form-control"
+                                        type="text"
+                                        placeholder="Enter first name">
+                                </div>
+
+                                <div class="form-group col-md-6  ">
+                                        <input
+                                        name="lastname"
+                                        id=""
+                                        class="form-control"
+                                        type="text"
+                                        placeholder="Enter last name">
+                                </div>
+                           </div>
+                                 <div class="row">
+                                <div class="form-group col-lg-12  ">
+                                        <input
+                                        name="phone"
+                                        id=""
+                                        class="form-control"
+                                        type="text"
+                                        placeholder="Enter phone number">
+                                </div>
+
+                                     <div class="form-group col-md-12  ">
+                                         <input
+                                         name="address"
+                                         id=""
+                                         class="form-control"
+                                         type="text"
+                                         placeholder="Enter your address">
+                                     </div>
+
+                                 </div>
+
+                               <div class="row">
+                                <div class="form-group col-md-6  ">
+                                        <input
+                                        name="nationality"
+                                        id=""
+                                        class="form-control"
+                                        type="text"
+                                        placeholder="Enter your nationality">
+                                </div>
+
+                               <div class="form-group col-md-6  ">
+                                        <input
+                                        name="nationalid"
+                                        id=""
+                                        class="form-control"
+                                        type="text"
+                                        placeholder="Enter your national ID">
+                                </div>
+                               </div>
+
+                           <div class="row">
+                           <div class="form-group col-md-6  ">
+                                        <select
+                                        name="company"
+                                        id=""
+                                        class="form-control"
+                                        >
+                                         <option value=""> -- select telecom company--</option>
+                                         <option value="mtn"> MTN </option>
+                                         <option value="airtel-tigo"> AIRTEL - TIGO </option>
+                                        </select>
+                                </div>
+
+
+                                <div class="form-group col-md-6  ">
+                                    <input
+                                    name="sitename"
+                                    id=""
+                                    class="form-control"
+                                    type="text"
+                                    placeholder="Enter site name">
+                                </div>
+                                </div>
+                       <div class="row">
+                        <div class="form-group col-md-12 ">
+                            <input
+                            name="passport"
+                            class="form-control"
+                            type="file"
+                            placeholder="passport photo">
+                        </div>
+                       </div>
+
+                                <div class=" form-group col-md-9  ">
+                                    <input type="submit" class="btn btn-primary col-md-6 " value="Submit">
+                                </div>
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!-- /.container-fluid -->
+    </div>
+        <!-- /.content-wrapper -->
+
+    <a class="scroll-to-top rounded" href="#">
+        <i class="fa fa-chevron-up"></i>
+    </a>
+
+    <script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC_7OucfzhqVC8ic_RPW0jPy-55OE0y-ZA&sensor=false&libraries=places">
+    </script>
+
+}

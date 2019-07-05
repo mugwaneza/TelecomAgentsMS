@@ -8,6 +8,9 @@ import play.mvc.*;
 
 import views.html.*;
 
+import java.util.Currency;
+import java.util.Set;
+
 public class Application extends Controller {
 
     public static Result index() {
@@ -59,34 +62,49 @@ public class Application extends Controller {
         //Access agentaccount model
         AgentsAccounts agentaccount  = new AgentsAccounts();
 
-     // Decrypt hashed password and compare it to input password
-//        boolean password = BCrypt.checkpw(Inpassword, agentaccount.password);
+
 
         // fetch data from agent table using input email method
          AgentsAccounts user = agentaccount.isEmailExist(email);
-         long myid = user.id;
 
+
+        // Decrypt hashed password and compare it to input password
         // check if email exist and if password match then return fetched id then continue
-           if ((agentaccount.isEmailExist(email))!=null  && BCrypt.checkpw(Inpassword, agentaccount.password)){
+           if ((agentaccount.isEmailExist(email))!=null  && BCrypt.checkpw(Inpassword, user.password)){
+               long myid = user.id;
+               String id =  Long.toString(myid);
 
-               String aa =  Long.toString(myid);
+               // Clear existing session
+              session().clear();
 
-               return  ok(aa);
+           //    create new session
+              session("agentlog", id);
+
+               return  redirect("/application/agent");
            }
          else {
 
-             return  ok();
+             flash("error", "Invalid email or password ");
+     //             flash("error", "Invalid email or password <a href=\"" + routes.Application.agentSingin().url()+"\" class=\"btn btn-link\">Log in</a>");
+             return  ok(signin_agent.render("error"));
            }
-
-
-
-//        // Clear existing session
-//        session().clear();
-//
-////        create new session
-//        session("agentlog", myloginForm.get().user_name);
-//
-//        return redirect("");
     }
+
+    public  static Result Apply(){
+        Set<Currency> availableCurrencies = Currency.getAvailableCurrencies();
+
+    return ok(application_agent.render(""));
+    }
+
+
+    /**
+     * Logout and clean the session.
+     */
+    public static Result logout() {
+        session().clear();
+        flash("success", "You've been logged out");
+        return Results.redirect("/agent/logout");
+    }
+
 
 }

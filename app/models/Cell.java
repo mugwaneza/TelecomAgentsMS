@@ -43,8 +43,9 @@ public class Cell extends Model {
                 .eq("cell",cell).findUnique();
     }
 
-    //     public static Look<Cell> on = new Look<>(Cell.class);
-
+    public  static List<Cell> findCells(){
+    return InfoCell.all();
+}  //     public static Look<Cell> on = new Look<>(Cell.class);
 
     //   @Exist
     // public boolean exist() {

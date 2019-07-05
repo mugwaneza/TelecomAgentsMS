@@ -8,6 +8,7 @@ GET    /                           controllers.Application.index()
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
+# Admin dashbord get method
 GET     /dashboard       controllers.AdminDashboard.DashboardIndex()
 GET     /dashboard/province       controllers.AdminDashboard.DashboardProvince()
 GET     /dashboard/district       controllers.AdminDashboard.DashboardDistrict()
@@ -16,17 +17,24 @@ GET     /dashboard/cell       controllers.AdminDashboard.DashboardCell()
 GET     /manage/accounts       controllers.AdminDashboard.DashboardAdminAccounts()
 
 
+#  Signin && signup routes
 GET     /signup/agent                controllers.Application.agentSignup()
 GET     /signin/agent                controllers.Application.agentSingin()
 
-
+# Admin dashbord post method
 POST    /dashboard/province/create        controllers.AdminDashboard.DashboardCreateProvince()
 POST    /dashboard/district/create        controllers.AdminDashboard.DashboardCreateDistrict()
 POST    /dashboard/sector/create        controllers.AdminDashboard.DashboardCreateSector()
 POST    /dashboard/cell/create        controllers.AdminDashboard.DashboardCreateCell()
 
-
+#   Signin && signup routes
 POST     /signup/agent/create                controllers.Application.agentSignupCreate()
 POST     /signin/agent/create                controllers.Application.agentSigninCreate()
+
+
+#  Agent application get methods
+GET /application/agent                controllers.Application.Apply()
+GET /agent/logout                     controllers.Application.logout()
+
 
 
