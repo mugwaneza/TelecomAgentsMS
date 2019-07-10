@@ -1,0 +1,32 @@
+@(message: String)
+@main("signing"){
+    @indexheader()
+
+    <section id="singupform">
+        <div class="container">
+            <div class="row">
+
+                <div class="form mt-3 col-md-12 offset-1">
+
+                    <h2> Dear  <b>@flash.get("names")</b> we are following up your Application </h2>
+
+                        <div class="alert alert-warning col-md-6 offset-6" role="alert">
+                            This time your application is pending, wait for feeback Patiently
+                        </div>
+
+
+
+
+            </div>
+        </div>
+    </section>
+
+    @*      Signup/Signin Section*@
+    @*    ============================-->*@
+
+    @signin_signup_model()
+
+
+    </main>
+
+}

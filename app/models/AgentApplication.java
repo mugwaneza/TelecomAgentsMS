@@ -1,14 +1,18 @@
 package models;
 
+import com.avaje.ebean.Expr;
 import play.data.validation.Constraints;
+import play.db.ebean.Model;
+import sun.management.Agent;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "applicant")
-public class AgentApplication {
+public class AgentApplication extends Model {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
@@ -74,4 +78,26 @@ public class AgentApplication {
     public String passportphoto;
 
     public Timestamp Created_at = new Timestamp(new Date().getTime());
+
+
+//         public static Look<Cell> on = new Look<>(Cell.class);
+//
+//       @Exist
+//     public boolean exist() {
+//         return on.exist("cell", this.cell);
+//     }
+    public static   Finder<Long, AgentApplication> findApplication = new Finder<>(Long.class,AgentApplication.class);
+
+
+    public  static  List<AgentApplication> applicationsList (String session){
+        return findApplication.where().eq("agent_id", session).findList();
+    }
+
+    public  static  AgentApplication application (String session){
+        return findApplication.where().eq("agent_id", session).findUnique();
+    }
+
+
+
+
 }

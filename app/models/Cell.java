@@ -45,12 +45,7 @@ public class Cell extends Model {
 
     public  static List<Cell> findCells(){
     return InfoCell.all();
-}  //     public static Look<Cell> on = new Look<>(Cell.class);
-
-    //   @Exist
-    // public boolean exist() {
-    //     return on.exist("cell", this.cell);
-    // }
+}
 
 
 

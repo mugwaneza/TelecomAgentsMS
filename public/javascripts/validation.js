@@ -110,4 +110,61 @@ $('#agentsigninform').validate({
 });
 
 
+$('#applicationForm').validate({
+
+    rules : {
+        district : {
+            required : true,
+        },
+        sector : {
+            required : true,
+        },
+        cell : {
+            required : true,
+        },
+        agglomeration : {
+            required : true,
+        },
+        firstname : {
+            required : true,
+        },
+        lastname : {
+            required : true,
+        },
+        phone : {
+            required : true,
+            number:true,
+            minlength:10
+        },
+
+        nationality : {
+            required : true,
+        },
+        address : {
+            required : true,
+        },
+        nationalid : {
+            required : true,
+            number:true,
+            minlength:18,
+            maxlength:18
+        },
+        company : {
+            required : true,
+        },
+        sitename : {
+            required : true,
+        },
+        passport : {
+            required : true,
+            accept: "jpeg|pjpeg"
+           },
+
+
+    }
+});
+
+
+
+
 

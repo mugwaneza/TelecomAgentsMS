@@ -32,8 +32,12 @@ POST     /signup/agent/create                controllers.Application.agentSignup
 POST     /signin/agent/create                controllers.Application.agentSigninCreate()
 
 
-#  Agent application get methods
+#  Agent application get and post methods
 GET /application/agent                controllers.Application.Apply()
+GET /applied/agent                controllers.Application.AppliedAgent()
+POST /application/submit                controllers.Application.ApplicationSubmit()
+
+#Logout route
 GET /agent/logout                     controllers.Application.logout()
 
 
