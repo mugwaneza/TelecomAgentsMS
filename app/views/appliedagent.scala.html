@@ -1,5 +1,5 @@
 @(message: String)
-@main("signing"){
+@main("applicant") {
     @indexheader()
 
     <section id="singupform">
@@ -7,17 +7,27 @@
             <div class="row">
 
                 <div class="form mt-3 col-md-12 offset-1">
+                    @if(message=="rejection"){
+                    <div class="alert alert-danger col-md-8 offset-1" role="alert">
+                        @Html(flash.get("rejection"))
+                    </div>
+                    }
 
-                    <h2> Dear  <b>@flash.get("names")</b> we are following up your Application </h2>
+                    @if(message =="nondecision"){
 
-                        <div class="alert alert-warning col-md-6 offset-6" role="alert">
-                            This time your application is pending, wait for feeback Patiently
-                        </div>
+                    <h2>
+                        Dear
+                        <b>@flash.get("names")</b>
+                        we are following up your Application</h2>
 
+                            <div class="alert alert-warning col-md-7  mt-4 offset-2" role="alert">
+                                @Html(flash.get("nondecision"))
+                            </div>
 
-
+                    }
 
             </div>
+        </div>
         </div>
     </section>
 
@@ -28,5 +38,4 @@
 
 
     </main>
-
 }

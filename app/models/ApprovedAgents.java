@@ -36,6 +36,13 @@ public class ApprovedAgents extends Model {
 
     public Timestamp approved_at = new Timestamp(new Date().getTime());
 
+    public static Finder<Long,ApprovedAgents> approved = new Finder<>(Long.class,ApprovedAgents.class);
+
+    public  static  List<ApprovedAgents> approved(){
+
+        return approved.where().eq("status", 1).findList();
+    }
+
 
 
 }

@@ -1,5 +1,5 @@
-<!-- Navigation -->
-
+@(message: String)
+<!-- Left navigation Menus-->
 <nav id="mainNav" class="navbar static-top navbar-toggleable-md navbar-inverse bg-inverse ">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarExample" aria-controls="navbarExample" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -55,8 +55,27 @@
                         </li>
                     </ul>
                 </li>
-
             }
+
+             @if(message=="approval") {
+
+
+
+                 <li class="nav-item active">
+                     <a class="nav-link" href="/dashboard"><i class=""></i>Agent Dashboard</a>
+                 </li>
+
+                         <li class="nav-item">
+                             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
+                             href="#collapseComponents"><i class="fa fa-fw fa-briefcase"></i> Agent Menu</a>
+                             <ul class="sidebar-second-level collapse" id="collapseComponents">
+                                 <li>
+                                     <a href="">Agent Inquiry</a>
+                                 </li>
+
+                             </ul>
+                         </li>
+                }
 
         </ul>
         <ul class="navbar-nav ml-auto">

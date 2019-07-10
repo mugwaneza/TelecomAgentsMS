@@ -1,6 +1,7 @@
 package controllers;
 
 import akka.util.ByteString;
+import com.fasterxml.jackson.databind.JsonNode;
 import models.*;
 import org.mindrot.jbcrypt.BCrypt;
 import play.*;
@@ -17,10 +18,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Currency;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import static org.joda.time.format.ISODateTimeFormat.time;
 
@@ -175,7 +174,7 @@ public class Application extends Controller {
         String photoname = (new Date()).getTime() +"_"+ fileName;
 
          //Create Files path
-        File Filespath = new File("public/uploads/" + photoname);
+        File Filespath = new File("/uploads/" + photoname);
         file.renameTo(Filespath); //here you are moving photo to path directory
 
         applicant.passportphoto = Filespath.getPath() ;
@@ -212,9 +211,35 @@ public class Application extends Controller {
       AgentApplication Isapplicant  =AgentApplication.application(ExistingSession);
       String firstname = Isapplicant.firstname;
       String lastname = Isapplicant.lastname;
+      String status = Isapplicant.reject_status;
+      String address = Isapplicant.address;
 
-        flash("names", firstname +" "+lastname );
-        return ok(appliedagent.render(""));
+      List<ApprovedAgents> myagent = ApprovedAgents.approved();
+       Boolean IsApproved = myagent !=null;
+
+      if(!IsApproved){
+
+
+          List<AgentApplication> contacts =  AgentApplication.applicationsList(ExistingSession);
+
+
+          flash("approval", "Your Application was approved as <b> Active agent</b> " );
+          System.out.println(IsApproved);
+          return ok(approvedagent_application.render("approval",contacts));
+      }
+      else if(status.equals("rejected")){
+
+          flash("rejection", "Dear <b> "+ firstname + " " + lastname +"</b>, Sorry Your Application have been rejected " );
+          return ok(appliedagent.render("rejection"));
+      }
+      else{
+
+          flash("names", firstname + " " + lastname);
+          //             flash("error", "Invalid email or password <a href=\"" + routes.Application.agentSingin().url()+"\" class=\"btn btn-link\">Log in</a>");
+
+          flash("nondecision","This time your application is pending, wait for feeback Patiently <a href=\"" + routes.Application.logout().url() + "\" class=\"btn btn-link\">Log out</a>");
+          return ok(appliedagent.render("nondecision"));
+      }
   }
 
 

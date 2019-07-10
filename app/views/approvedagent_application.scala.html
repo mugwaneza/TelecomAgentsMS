@@ -1,6 +1,6 @@
-@(message: String )
-@main_dashboard("application" ) {
-    @views.html.navigation("message")
+@(message: String)(contacts : List[AgentApplication])
+@main_dashboard("approved" ) {
+    @views.html.navigation("approval")
 
     <div class="content-wrapper">
         <div class="container-fluid">
@@ -12,53 +12,42 @@
 
                     <form class=" mt-5" action="/application/submit"  autocomplete="off" method="POST" id="applicationForm" enctype="multipart/form-data" >
 
-                                <h1 class="text-primary">For the complete application fill the following form </h1>
+                                @if(message=="approval"){
 
-                                @if(message == "error") {
-                                    <div class="alert alert-danger col-md-8  offset-1" role="alert">
-                                        @Html(flash.get("error"))
+
+                                    <div class="alert alert-success col-md-8 offset-2" role="alert">
+                                        @Html(flash.get("approval"))
                                     </div>
+                                    @for(contact <- contacts) {
 
-                                }
-                                @if(message=="success"){
+                                        <div class="row">
+                                            <div class=" col-md-6 mt-5">
+                                                <div class="form-group   ">
+                                        <div class="col-md-3">
+                                            <img src="@routes.Assets.at(contact.passportphoto)" alt="passpost" width="140" height="140">
+                                        </div>
+                                                </div>
+                                                </div>
+                                                </div>
 
-                                    <div class="alert alert-success col-md-8 offset-1" role="alert">
-                                        @Html(flash.get("success"))
-                                    </div>
-                                }
                                 <div class="row">
                                 <div class=" col-md-6">
                                 <div class="form-group   ">
-                                        <select  name="district" class="form-control">
-                                            <option value=""> -- select district -- </option>
-                                            @for(i <- District.findDistrict()) {
-                                                <option value="@i.id">@i.district</option>
-                                            }
-                                        </select>
+                                        <input  name="district" disabled class="form-control" value="District : @contact.district.district" type="disabled">
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                 <div class="form-group   ">
-                                        <select  name="sector" class="form-control">
-                                            <option value=""> -- select sector -- </option>
-                                            @for(i <- Sector.findSectors()) {
-                                                <option value="@i.id">@i.sector</option>
-                                            }
-                                        </select>
+                                    <input  name="sector" disabled class="form-control" value="Sector : @contact.sector.sector" type="disabled">
                                 </div>
                                 </div>
                                 </div>
 
                                    <div class="row">
                                    <div class="form-group col-md-6  ">
-                                        <select  name="cell" class="form-control">
-                                            <option value=""> -- select cell -- </option>
-                                            @for(i <- Cell.findCells()) {
-                                                <option value="@i.id">@i.cell</option>
-                                            }
-                                        </select>
-                                </div>
+                                       <input  name="cell" disabled class="form-control" value="Cell : @contact.cell.cell" type="disabled">
+                                   </div>
 
                                 <div class="form-group col-md-6">
                                         <input
@@ -66,6 +55,8 @@
                                         id="agglomeration"
                                         class="form-control"
                                         type="text"
+                                        disabled
+                                            value="Village : @contact.agromeration"
                                         placeholder="Enter agglomeration name">
                                 </div>
                                    </div>
@@ -77,15 +68,18 @@
                                         id=""
                                         class="form-control"
                                         type="text"
+                                        value="First name: @contact.firstname"
+                                        disabled
                                         placeholder="Enter first name">
                                 </div>
 
                                 <div class="form-group col-md-6  ">
                                         <input
                                         name="lastname"
-                                        id=""
+                                        value="Last name: @contact.lastname"
                                         class="form-control"
                                         type="text"
+                                        disabled
                                         placeholder="Enter last name">
                                 </div>
                            </div>
@@ -93,18 +87,20 @@
                                 <div class="form-group col-lg-12  ">
                                         <input
                                         name="phone"
-                                        id=""
+                                        value="Phone number: @contact.phonenumber"
                                         class="form-control"
                                         type="text"
+                                        disabled
                                         placeholder="Enter phone number">
                                 </div>
 
                                      <div class="form-group col-md-12  ">
                                          <input
                                          name="address"
-                                         id=""
+                                         value="Address : @contact.address"
                                          class="form-control"
                                          type="text"
+                                         disabled
                                          placeholder="Enter your address">
                                      </div>
 
@@ -114,16 +110,18 @@
                                 <div class="form-group col-md-6  ">
                                         <input
                                         name="nationality"
-                                        id=""
+                                        value="Nationality : @contact.nationality"
                                         class="form-control"
                                         type="text"
+                                        disabled
                                         placeholder="Enter your nationality">
                                 </div>
 
                                <div class="form-group col-md-6  ">
                                         <input
                                         name="nationalid"
-                                        id=""
+                                        value="National ID: @contact.nid"
+                                            disabled
                                         class="form-control"
                                         type="text"
                                         placeholder="Enter your national ID">
@@ -132,40 +130,30 @@
 
                            <div class="row">
                            <div class="form-group col-md-6  ">
-                                        <select
-                                        name="company"
-                                        id=""
-                                        class="form-control"
-                                        >
-                                         <option value=""> -- select telecom company--</option>
-                                         <option value="mtn"> MTN </option>
-                                         <option value="airtel-tigo"> AIRTEL - TIGO </option>
-                                        </select>
+                               <input
+                               name="comapny"
+                               value="Telecom company : @contact.company"
+                               disabled
+                               class="form-control"
+                               type="text"
+                               placeholder="">
                                 </div>
 
 
                                 <div class="form-group col-md-6  ">
                                     <input
                                     name="sitename"
-                                    id=""
-                                    class="form-control"
+                                    value="Centre station name : @contact.sitename"
+                                    disabled                                    class="form-control"
                                     type="text"
                                     placeholder="Enter site name">
                                 </div>
                                 </div>
-                       <div class="row">
-                        <div class="form-group col-md-12 ">
-                            <input
-                            name="passport"
-                            class="form-control"
-                            type="file"
-                            placeholder="passport photo">
-                        </div>
-                       </div>
 
-                                <div class=" form-group col-md-9  ">
-                                    <input type="submit" class="btn btn-primary col-md-6 " value="Submit">
-                                </div>
+                                    }
+
+                                }
+
                             </form>
 
                         </div>
