@@ -1,3 +1,4 @@
+@(message: String)
 @main_dashboard("TAMS" ) {
 
     @views.html.navigation("message")
@@ -8,12 +9,26 @@
                 <div class="page-header" style="background-image: url('@routes.Assets.at("images/vehicle3.jpg")')">
 
                     <div class="container">
-                        <div class="col-md-12"><br>
-
-                            <h1 class="text-success">Manage system admin accounts</h1>
+                        <div class="col-md-9"><br>
 
 
-                            <form class="col-sm-offset-2" action="" id="RegisterAdmin-form" method="POST" >
+                            @if(message == "error") {
+                                <div class="alert alert-danger col-md-6 offset-1" role="alert">
+                                @flash.get("error")
+                                </div>
+
+                            }
+                            @if(message=="success"){
+
+                                <div class="alert alert-success col-md-6 offset-1" role="alert">
+                                @flash.get("success")
+                                </div>
+                            }
+
+                            <h2 class="text-success" style="margin-left:5%;">Create system admin accounts</h2>
+
+
+                            <form class="col-sm-offset-2" action="/admin/user/create"  id="adminsignup" autocomplete="off" method="POST" >
 
 
                                 <div class="form-group row  ">
@@ -29,7 +44,7 @@
                                 <div class="form-group row  ">
                                     <div class="col-sm-10">
                                         <select  name="gender" class="form-control">
-                                            <option> -- select gender -- </option>
+                                            <option value=""> -- select gender -- </option>
                                             <option value="male"> Male </option>
                                             <option value="female"> Female </option>
                                         </select>
@@ -40,7 +55,7 @@
                                 <div class="form-group row  ">
                                     <div class="col-sm-10">
                                         <select  name="company" class="form-control">
-                                            <option> -- select your Telecom company -- </option>
+                                            <option value=""> -- select your Telecom company -- </option>
                                             <option value="mtn"> MTN </option>
                                             <option value="airteltigo"> AIRTEL - TIGO </option>
                                         </select>

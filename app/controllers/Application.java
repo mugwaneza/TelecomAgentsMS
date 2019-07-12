@@ -34,6 +34,7 @@ public class Application extends Controller {
         return ok(signup_agent.render("welcome"));
     }
 
+      // Display agent signin form
     public static  Result agentSingin(){
 
         // Find user session
@@ -45,15 +46,13 @@ public class Application extends Controller {
            AgentApplication applicant  =AgentApplication.application(ExistingSession);
             boolean applied = applicant !=null;
 
-            if (applied){            // When student has loggedin and applied
+            if (applied){    // When student has loggedin and applied
 
                 return redirect("/applied/agent");
             }
-            else{            // When student has loggedin and has not applied
-
+            else{     // When student has loggedin and has not applied
 
                 return redirect("/application/agent");
-
             }
 
         }else{
@@ -84,7 +83,7 @@ public class Application extends Controller {
     }
     }
 
-    // login
+    // login for agent  function
     public static Result agentSigninCreate(){
 
 
@@ -249,6 +248,7 @@ public class Application extends Controller {
      * Logout and clean the session.
      */
     public static Result logout() {
+
         session().clear();
         flash("success", "You've been logged out");
         return Results.redirect("/");

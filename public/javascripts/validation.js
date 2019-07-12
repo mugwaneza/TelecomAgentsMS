@@ -95,6 +95,40 @@ $('#agentsigupform').validate({
     }
 });
 
+
+// Agent signup form
+$('#adminsignup').validate({
+    rules : {
+        fullname : {
+            required : true,
+            minlength : 6
+        },
+        gender : {
+            required : true
+        } ,
+        email : {
+            required : true,
+            email: true
+        },
+        password : {
+            required : true,
+            minlength : 8
+         },
+        company : {
+            required : true,
+         },
+        gender : {
+            required : true,
+         },
+        address : {
+            required : true,
+         }
+
+
+    }
+});
+
+
 $('#agentsigninform').validate({
 
     rules : {

@@ -49,18 +49,4 @@ public class AgentsAccounts extends Model {
 
     }
 
-
-//    public  static boolean sd(){
-//
-//        List<AgentsAccounts> tasks = (List<AgentsAccounts>) FindAgent.where()
-//                .ilike("name", "%coco%")
-//                .orderBy("dueDate asc");
-//
-//         if (tasks.isEmpty()){
-//             return false;
-//          }else{
-//             return true;
-//         }
-//
-//    }
 }

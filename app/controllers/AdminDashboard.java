@@ -1,11 +1,16 @@
 package controllers;
 
 import models.*;
+import org.mindrot.jbcrypt.BCrypt;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
+import views.html.adminaccounts;
+import views.html.signin_admin;
+import views.html.signin_agent;
+import views.html.signup_agent;
 
 import static play.data.Form.form;
 
@@ -44,7 +49,7 @@ public class AdminDashboard extends Controller {
 
     public static Result DashboardAdminAccounts() {
 
-        return ok(views.html.adminaccounts.render());
+        return ok(views.html.adminaccounts.render(""));
 
     }
 
@@ -142,6 +147,86 @@ public class AdminDashboard extends Controller {
     }
 
 
+    // View Admin sign function
+    public static Result adminLogin(){
+
+            // Find user session
+            boolean Session =  session().get("adminlog") !=null;
+            if(Session){
+
+            return redirect(routes.AdminDashboard.DashboardIndex());
+            }else{
+                return ok(signin_admin.render("welcome"));
+            }
+         }
+
+//         Signin  admin function
+
+    public static Result adminSignCreate(){
+
+        // get form's email and password
+        DynamicForm myloginForm = new DynamicForm().bindFromRequest();
+        String email = myloginForm.get("email");
+        String Inpassword = myloginForm.get("password");
+
+
+        //Access admin  model
+        AdminAccount admin  = new AdminAccount();
+
+        // fetch data from agent table using input email method
+         AdminAccount user = admin.isEmailExist(email);
+
+        // Decrypt hashed password and compare it to input password
+        // check if email exist and if password match then return fetched id then continue
+
+        if ((admin.isEmailExist(email))!=null  && BCrypt.checkpw(Inpassword, user.password)){
+
+            long myid = user.id;
+            String id =  Long.toString(myid);
+
+            // Clear existing session
+            session().clear();
+
+            //    create new session
+            session("adminlog", id);
+
+            return  redirect("/dashboard");
+        }
+        else {
+
+            flash("error", "Invalid email or password ");
+            return  ok(signin_admin.render("error"));
+        }
+    }
+
+
+
+
+
+    public static Result adminLoginCreateAcount(){
+
+        DynamicForm signupForm = new DynamicForm().bindFromRequest();
+        AdminAccount user = new AdminAccount();
+        user.fullname =signupForm.field("fullname").value();
+        user.gender =signupForm.field("gender").value();
+        user.company =signupForm.field("company").value();
+        user.email =signupForm.field("email").value();
+        String Texpassword =signupForm.field("password").value();
+        user.password = BCrypt.hashpw(Texpassword, BCrypt.gensalt());
+        user.address  =signupForm.field("address").value();
+
+        String email = signupForm.get("email");
+        if ((user.isEmailExist(email) ) == null){
+            user.save();
+            flash("success", "successfully registered");
+            return ok(views.html.adminaccounts.render("success"));
+        }
+        else {
+
+            flash("error", "User with email : " +email+ " aleready exist");
+            return badRequest(adminaccounts.render("error"));
+        }
+    }
 
 
 

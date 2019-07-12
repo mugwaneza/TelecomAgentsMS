@@ -21,6 +21,12 @@ GET     /manage/accounts       controllers.AdminDashboard.DashboardAdminAccounts
 GET     /signup/agent                controllers.Application.agentSignup()
 GET     /signin/agent                controllers.Application.agentSingin()
 
+# Admin login routes
+GET     /admin/login                controllers.AdminDashboard.adminLogin()
+POST     /admin/login                controllers.AdminDashboard.adminSignCreate()
+POST    /admin/user/create        controllers.AdminDashboard.adminLoginCreateAcount()
+
+
 # Admin dashbord post method
 POST    /dashboard/province/create        controllers.AdminDashboard.DashboardCreateProvince()
 POST    /dashboard/district/create        controllers.AdminDashboard.DashboardCreateDistrict()
@@ -36,6 +42,13 @@ POST     /signin/agent/create                controllers.Application.agentSignin
 GET /application/agent                controllers.Application.Apply()
 GET /applied/agent                controllers.Application.AppliedAgent()
 POST /application/submit                controllers.Application.ApplicationSubmit()
+
+
+#//Admin reporting and approval
+GET /manage/agents                controllers.ReportingControl.ListAppicants()
+
+
+
 
 #Logout route
 GET /agent/logout                     controllers.Application.logout()

@@ -6,9 +6,9 @@
         <div class="container">
             <div class="row">
 
-    <form class="form mt-3 col-md-6 offset-3" method="post" action="/signin/agent/create " autocomplete="off" id="agentsigninform">
+                <form class="form mt-3 col-md-6 offset-3" method="post" action="/admin/login" autocomplete="off" id="agentsigninform">
 
-                    <h2>Go To Sign Form</h2>
+                    <h2>Admin Signin Form</h2>
 
                     @if(message == "error") {
                         <div class="alert alert-danger col-md-8 offset-1" role="alert">
@@ -35,12 +35,6 @@
             </div>
         </div>
     </section>
-
-    @*      Signup/Signin Section*@
-    @*    ============================-->*@
-
-    @signin_signup_model()
-
 
     </main>
 

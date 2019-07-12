@@ -80,13 +80,7 @@ public class AgentApplication extends Model {
     public Timestamp Created_at = new Timestamp(new Date().getTime());
 
 
-//         public static Look<Cell> on = new Look<>(Cell.class);
-//
-//       @Exist
-//     public boolean exist() {
-//         return on.exist("cell", this.cell);
-//     }
-    public static   Finder<Long, AgentApplication> findApplication = new Finder<>(Long.class,AgentApplication.class);
+    public static Model.Finder<Long, AgentApplication> findApplication = new Model.Finder<>(Long.class,AgentApplication.class);
 
 
     public  static  List<AgentApplication> applicationsList (String session){
@@ -95,6 +89,12 @@ public class AgentApplication extends Model {
 
     public  static  AgentApplication application (String session){
         return findApplication.where().eq("agent_id", session).findUnique();
+    }
+
+
+    public static List<AgentApplication> applicant(){
+
+        return findApplication.all();
     }
 
 

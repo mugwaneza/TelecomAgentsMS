@@ -14,47 +14,42 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/dashboard"><i class=""></i>Admin Dashboard</a>
                 </li>
-
                 <li class="nav-item">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
-                    href="#collapseComponents"><i class="fa fa-fw fa-cogs"></i> System settings</a>
-                    <ul class="sidebar-second-level collapse" id="collapseComponents">
-                        <li>
-                            <a href="/dashboard/province ">Register Province</a>
-                        </li>
-                        <li>
-                            <a href="/dashboard/district">Register District</a>
-                        </li>
-                        <li>
-                            <a href="/dashboard/sector">Register Sector</a>
-                        </li>
-
-                        <li>
-                            <a href="/dashboard/cell">Register Cell</a>
-                        </li>
-                        <li>
-                            <a href="">Advanced settings</a>
-                        </li>
-
-                    </ul>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" aria-expanded="false"><i class="fa fa-fw fa-lock"></i>
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" aria-expanded="false"><i class="fa fa-fw fa-lock"></i><i  class="fa  fa-fw fa-caret-right"></i>
                         Manage</a>
                     <ul class="sidebar-second-level collapse" id="collapseMulti">
                         <li>
-                            <a href="/manage/driver">Handle applications</a>
+                            <a href="/manage/agents"><i  class="fa  fa-fw fa-caret-down"></i> Handle applications</a>
                         </li>
                         <li>
-                            <a href="/service/driver">Active Agents</a>
+                            <a href="/manage/accounts "><i  class="fa  fa-fw fa-caret-down"></i>Manage accounts</a>
                         </li>
-
                         <li>
-                            <a href="/manage/accounts ">Admin accounts</a>
+                            <a href="/manage/accounts "><i  class="fa  fa-fw fa-caret-down"></i> Admin accounts</a>
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
+                    href="#collapseComponents"><i class="fa fa-fw fa-cogs"></i><i  class="fa  fa-fw fa-caret-right"></i> System settings</a>
+                    <ul class="sidebar-second-level collapse" id="collapseComponents">
+                        <li>
+                            <a href="/dashboard/province "><i  class="fa  fa-fw fa-caret-down"></i> Register Province</a>
+                        </li>
+                        <li>
+                            <a href="/dashboard/district"><i  class="fa  fa-fw fa-caret-down"></i> Register District</a>
+                        </li>
+                        <li>
+                            <a href="/dashboard/sector"><i  class="fa  fa-fw fa-caret-down"></i> Register Sector</a>
+                        </li>
+
+                        <li>
+                            <a href="/dashboard/cell"><i  class="fa  fa-fw fa-caret-down"></i> Register Cell</a>
+                        </li>
+
+                    </ul>
+                </li>
+
             }
 
              @if(message=="approval") {

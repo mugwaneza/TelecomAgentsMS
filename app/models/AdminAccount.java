@@ -46,4 +46,12 @@ public class AdminAccount extends Model {
     public String address;
 
     public Timestamp Created_at = new Timestamp(new Date().getTime());
+
+    public static Finder<Long,AdminAccount> FindAdmin = new Finder < >(Long.class, AdminAccount.class);
+
+
+    public static  AdminAccount isEmailExist(String email){
+
+        return FindAdmin.where().eq("email", email).findUnique();
+    }
 }
