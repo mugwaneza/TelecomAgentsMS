@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.Expr;
+import com.avaje.ebean.ExpressionList;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 import sun.management.Agent;
@@ -91,10 +92,18 @@ public class AgentApplication extends Model {
         return findApplication.where().eq("agent_id", session).findUnique();
     }
 
-
+ // get the list of all applicants before decision
     public static List<AgentApplication> applicant(){
 
-        return findApplication.all();
+//        return findApplication.wher  e().not(Expr.eq("reject_status", "rejected")).or(Expr.not(Expr.eq("reject_status","rejected"))).findList();
+        return findApplication.where().eq("reject_status", "0").findList();
+    }
+
+
+    // get the list of all applicants after decision
+    public static List<AgentApplication> appliedAgents(){
+
+        return findApplication.where().ne("reject_status", "0").findList();
     }
 
 

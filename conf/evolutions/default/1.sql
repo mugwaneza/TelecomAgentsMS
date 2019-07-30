@@ -62,8 +62,9 @@ create table approved_agents (
   id                        bigint auto_increment not null,
   applicant_id              bigint,
   admin_id                  bigint,
-  status                    varchar(255),
-  comment                   varchar(255),
+  status                    tinyint(1) default 0,
+  walletnumber              varchar(255),
+  airtimenumber             varchar(255),
   approved_at               datetime,
   constraint pk_approved_agents primary key (id))
 ;

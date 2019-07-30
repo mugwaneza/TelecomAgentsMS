@@ -1,5 +1,7 @@
 package controllers;
 
+import com.avaje.ebean.Ebean;
+import com.avaje.ebean.SqlUpdate;
 import models.*;
 import org.mindrot.jbcrypt.BCrypt;
 import play.data.DynamicForm;
@@ -164,6 +166,7 @@ public class AdminDashboard extends Controller {
 
     public static Result adminSignCreate(){
 
+
         // get form's email and password
         DynamicForm myloginForm = new DynamicForm().bindFromRequest();
         String email = myloginForm.get("email");
@@ -202,7 +205,7 @@ public class AdminDashboard extends Controller {
 
 
 
-
+      // Admin login method
     public static Result adminLoginCreateAcount(){
 
         DynamicForm signupForm = new DynamicForm().bindFromRequest();
@@ -230,5 +233,45 @@ public class AdminDashboard extends Controller {
 
 
 
+// Approve agent
 
-}
+    public static Result ApproveAgent(){
+        myform  = form().bindFromRequest();
+        ApprovedAgents agent = new ApprovedAgents();
+
+        String applicantid = myform.field("userid").value();
+        agent.applicant  = AgentApplication.findApplication.byId(Long.parseLong(applicantid));
+        String adminid = session().get("adminlog");
+        agent.admin = AdminAccount.FindAdmin.byId(Long.parseLong(adminid));
+        agent.status = true;
+        agent.walletnumber = myform.field("wallet").value();
+        agent.airtimenumber = myform.field("airtime").value();
+        agent.save();
+
+        // Afteer approve Agent Update reject status in applicant table
+
+        SqlUpdate update = Ebean. createSqlUpdate("UPDATE applicant SET reject_status=:reject_status WHERE id=:id")
+                .setParameter("reject_status", "approved")
+                .setParameter("id", applicantid);
+         int rows = update.execute();
+
+        return redirect(routes.ReportingControl.ListAppicants());
+    }
+
+     // Reject applicant
+
+    public static Result RejectApplicant(){
+
+        myform  = form().bindFromRequest();
+        String applicantid = myform.field("rejectid").value();
+
+        SqlUpdate update = Ebean. createSqlUpdate("UPDATE applicant SET reject_status=:reject_status WHERE id=:id")
+                .setParameter("reject_status", "rejected")
+                .setParameter("id", applicantid);
+        int rows = update.execute();
+
+        return redirect(routes.ReportingControl.ListAppicants());
+    }
+
+
+    }

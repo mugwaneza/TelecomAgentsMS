@@ -1,0 +1,287 @@
+@(message: String)
+@main_dashboard("TAMS" ) {
+
+    @views.html.navigation("message")
+
+    <div class="content-wrapper py-3">
+        <div class="container-fluid">
+            <div class="row trak_map_page">
+                <div class="page-header" style="background-image: url('@routes.Assets.at("images/vehicle3.jpg")')">
+
+                    <div class="container">
+                        <div class="col-md-9"><br>
+
+
+                            @if(message == "error") {
+                                <div class="alert alert-danger col-md-6 offset-1" role="alert">
+                                @flash.get("error")
+                                </div>
+
+                            }
+                            @if(message=="success"){
+
+                                <div class="alert alert-success col-md-6 offset-1" role="alert">
+                                @flash.get("success")
+                                </div>
+                            }
+
+                            <h2 class="text-success" style="margin-left:5%;">Admins accounts</h2>
+
+
+                            <div class="col-sm-offset-1" id="tablediv">
+                                <table class="table   table-bordered table-hover table-striped ">
+
+
+                                    <thead>
+                                        <tr class="bg-success text-white">
+                                            <th>id</th>
+                                            <th>Fullname</th>
+                                            <th>Gender</th>
+                                            <th>Company</th>
+                                            <th>Email</th>
+                                            <th>Address</th>
+                                            <th  style="padding-left:30px;padding-right: 30px;">Created at</th>
+                                            <th>Reject</th>
+                                            <th>Accept</th>
+                                        </tr>
+                                    </thead>
+
+                                    @for(admin <- AdminAccount.FindAdmin.all() ) {
+                                        <tr>
+                                            <td class="id">
+                                            @admin.id
+                                            </td>
+
+                                            <td class="fullname">
+                                            @admin.fullname
+                                            </td>
+                                            <td class="gender">
+                                            @admin.gender
+
+                                            </td>
+
+                                            <td class="company">
+                                            @admin.company
+                                            </td>
+
+                                            <td class="email">
+                                            @admin.email
+
+                                            </td>
+                                            <td class="address">
+                                            @admin.address
+                                            </td>
+                                            <td class="createdat" >
+                                           <span  style="width: 200px;"> @admin.Created_at</span>
+                                            </td>
+
+                                            <td>
+                                                <button type="button" class="btn btn-primary btn-sm editbtn" >Edit</button>
+
+                                            </td>
+
+                                            <td>
+                                                <input type="button" value="Delete" class="btn btn-sm btn-danger deletebtn">
+                                            </td>
+
+                                        </tr>
+                                    }
+
+
+                                </table>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- /.container-fluid -->
+    </div>
+        <!-- /.content-wrapper -->
+
+    <a class="scroll-to-top rounded" href="#">
+        <i class="fa fa-chevron-up"></i>
+    </a>
+
+
+
+    @*User Details Model*@
+    @*    ============================-->*@
+
+    <section id="">
+        <div class="container">
+            <div class="row">
+                <div class="modal fade" id="editmodel" tabindex="-1" role="dialog" aria-labelledby="editmodel" aria-hidden="true">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title center" id="">Edit admin detail</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body offset-3 ">
+
+                                <form class="" action="/admin/modify/account"  id="" autocomplete="off" method="POST" >
+                                    <input
+                                    name="userid"
+                                    id="userid"
+                                    class="form-control"
+                                    type="hidden"
+                                     >
+                                    <div class="form-group row  ">
+                                        <div class="col-sm-10">
+                                            <input
+                                            name="fullname"
+                                            id="fullname"
+                                            class="form-control"
+                                            type="text"
+                                            placeholder="Enter Full name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row  ">
+                                        <div class="col-sm-10">
+                                            <select  name="gender" class="form-control" id="gender">
+                                                <option value=""> -- select gender -- </option>
+                                                <option value="male"> Male </option>
+                                                <option value="female"> Female </option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row  ">
+                                        <div class="col-sm-10">
+                                            <select  name="company" class="form-control" id="company">
+                                                <option value=""> -- select your Telecom company -- </option>
+                                                <option value="mtn"> MTN </option>
+                                                <option value="airteltigo"> AIRTEL - TIGO </option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group row  ">
+                                        <div class="col-sm-10">
+                                            <input
+                                            name="email"
+                                            id="email"
+                                            class="form-control"
+                                            type="email"
+                                            placeholder="Enter email">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row  ">
+                                        <div class="col-sm-10">
+                                            <input
+                                            name="password"
+                                            id="password"
+                                            class="form-control"
+                                            type="password"
+                                            placeholder="Enter password">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row  ">
+                                        <div class="col-sm-10">
+                                            <input
+                                            name="address"
+                                            id="address"
+                                            class="form-control"
+                                            type="address"
+                                            placeholder="Enter address">
+                                        </div>
+                                    </div>
+
+
+                                    <div class=" form-group col-md-offset-4  ">
+                                        <input type="submit" class="btn btn-primary " value="Submit">
+                                    </div>
+                                </form>
+
+
+
+                            </div>
+                            <div class="modal-footer">
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+@*    Delete Dialog*@
+
+    <section id="">
+        <div class="container">
+            <div class="row">
+                <div class="modal fade" id="deletemodel" tabindex="-1" role="dialog" aria-labelledby="deletemodel" aria-hidden="true">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title center" id="">Would you like to delete this admin ?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body col-md-8 offset-2">
+
+                                <form action="/admin/modify/delete"  method="post" id="deleteform">
+                                    <input type="hidden"  name="deletid" id="deletid">
+
+                                    <div class="row" >
+                                        <div class="form-group col-md-6 ">
+
+                                            <input
+                                            value="delete"
+                                            class="form-control btn btn-danger"
+                                            type="submit"
+                                            >
+                                        </div>
+                                        <div class="form-group col-md-6">
+
+                                            <input
+                                            value="Cancel"
+                                            class="form-control btn btn-warning"
+                                            type="button"
+                                            data-dismiss="modal"
+                                            >
+                                        </div>
+                                    </div>
+
+                                </form>
+
+
+
+                            </div>
+                            <div class="modal-footer">
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC_7OucfzhqVC8ic_RPW0jPy-55OE0y-ZA&sensor=false&libraries=places">
+    </script>
+
+}

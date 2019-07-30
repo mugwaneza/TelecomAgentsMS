@@ -47,7 +47,7 @@ public class AdminAccount extends Model {
 
     public Timestamp Created_at = new Timestamp(new Date().getTime());
 
-    public static Finder<Long,AdminAccount> FindAdmin = new Finder < >(Long.class, AdminAccount.class);
+    public static Model.Finder<Long,AdminAccount> FindAdmin = new Model.Finder < >(Long.class, AdminAccount.class);
 
 
     public static  AdminAccount isEmailExist(String email){

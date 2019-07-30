@@ -1,0 +1,317 @@
+@(message: String)
+@main_dashboard("TAMS" ) {
+
+    @views.html.navigation("message")
+
+    <div class="content-wrapper py-3">
+        <div class="container-fluid">
+            <div class="row trak_map_page">
+                <div class="page-header" style="background-image: url('@routes.Assets.at("images/vehicle3.jpg")')">
+
+                    <div class="container">
+                        <div class="col-md-9"><br>
+
+
+                            @if(message == "error") {
+                                <div class="alert alert-danger col-md-6 offset-1" role="alert">
+                                @flash.get("error")
+                                </div>
+
+                            }
+                            @if(message=="success"){
+
+                                <div class="alert alert-success col-md-6 offset-1" role="alert">
+                                @flash.get("success")
+                                </div>
+                            }
+
+                            <h2 class="text-success" style="margin-left:5%;">Applicants Decision list</h2>
+
+
+                            <div class="col-sm-offset-1" id="tablediv">
+                                <table class="table   table-bordered table-hover table-striped ">
+
+
+                                    <thead>
+                                        <tr class="bg-primary text-white">
+                                            <th>id</th>
+                                            <th>Fisrtname</th>
+                                            <th>lastname</th>
+                                            <th>Station</th>
+                                            <th>Telephone</th>
+                                            <th>Address</th>
+                                            <th>View</th>
+                                            <th >status</th>
+                                        </tr>
+                                    </thead>
+
+                                    @for(applicant <- AgentApplication.appliedAgents() ) {
+                                        <tr>
+                                            <td class="id">
+                                            @applicant.id
+                                            </td>
+
+                                            <td class="firstname">
+                                            @applicant.firstname
+                                            </td>
+                                            <td class="lastname">
+                                            @applicant.lastname
+
+                                            </td>
+
+                                            <td class="sitename">
+                                            @applicant.sitename
+                                            </td>
+
+                                            <td class="phonenumber">
+                                            @applicant.phonenumber
+
+                                            </td>
+                                            <td class="address">
+                                            @applicant.address
+
+                                            </td>
+
+                                            <td class="district" hidden="true">
+                                            @applicant.district.district
+                                            </td>
+                                            <td class="sector" hidden="true">
+                                            @applicant.sector.sector
+                                            </td>
+                                            <td class="cell" hidden="true">
+                                            @applicant.cell.cell
+                                            </td>
+                                            <td class="nationality" hidden="true">
+                                            @applicant.nationality
+                                            </td>
+                                            <td class="nid" hidden="true">
+                                            @applicant.nid
+                                            </td>
+                                            <td class="company" hidden="true">
+                                            @applicant.company
+                                            </td>
+                                            <td class="passportphoto" hidden="true">
+                                            @applicant.passportphoto
+                                            </td>
+                                            <td class="agromeration" hidden="true">
+                                            @applicant.agromeration
+                                            </td>
+
+                                            <td>
+                                                <button type="button" class="btn btn-primary btn-sm detail" data-toggle="modal" data-target="#detail">Detail</button>
+                                            </td>
+
+                                            <td >
+                                                <span class="text-primary">
+                                                    @applicant.reject_status
+                                                </span>
+                                            </td>
+
+                                        </tr>
+                                    }
+
+                                </table>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- /.container-fluid -->
+    </div>
+        <!-- /.content-wrapper -->
+
+    <a class="scroll-to-top rounded" href="#">
+        <i class="fa fa-chevron-up"></i>
+    </a>
+
+
+
+    @*User Details Model*@
+    @*    ============================-->*@
+
+    <section id="">
+        <div class="container">
+            <div class="row">
+                <div class="modal fade" id="detail" tabindex="-1" role="dialog" aria-labelledby="Details" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title center" id="">Applicant detail</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body ">
+
+
+
+                                <form class=" mt-5"  id="applicationForm" enctype="multipart/form-data"  >
+
+                                    <div class="row">
+                                        <div class=" col-md-6 mt-5">
+                                            <div class="form-group   ">
+                                                <div class="col-md-3">
+                                                    <img  alt="passpost" id="passportphoto" width="140" height="140">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class=" col-md-6">
+                                            <div class="form-group   ">
+                                                <input  name="district" value="" disabled class="form-control" id="district"  type="disabled">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group   ">
+                                                <input  name="sector" disabled class="form-control" id="sector"  type="disabled">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-6  ">
+                                            <input  name="cell" disabled class="form-control" id="cell" type="disabled">
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                            <input
+                                            name="agglomeration"
+                                            id="agromeration"
+                                            class="form-control"
+                                            type="text"
+                                            disabled
+
+                                            placeholder="Enter agglomeration name">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-6  ">
+                                            <input
+                                            name="firstname"
+                                            id="firstname"
+                                            class="form-control"
+                                            type="text"
+                                            disabled
+                                            placeholder="Enter first name">
+                                        </div>
+
+                                        <div class="form-group col-md-6  ">
+                                            <input
+                                            name="lastname"
+                                            id="lastname"
+                                            class="form-control"
+                                            value=""
+                                            type="text"
+                                            disabled
+                                            placeholder="Enter last name">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-lg-12  ">
+                                            <input
+                                            name="phone"
+                                            class="form-control"
+                                            type="text"
+                                            disabled
+                                            id="phonenumber"
+                                            placeholder="Enter phone number">
+                                        </div>
+
+                                        <div class="form-group col-md-12  ">
+                                            <input
+                                            name="address"
+                                            value="Address : "
+                                            class="form-control"
+                                            type="text"
+                                            disabled
+                                            id="address"
+                                            placeholder="Enter your address">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-6  ">
+                                            <input
+                                            name="nationality"
+                                            value="Nationality :"
+                                            class="form-control"
+                                            type="text"
+                                            disabled
+                                            id="nationality"
+                                            placeholder="Enter your nationality">
+                                        </div>
+
+                                        <div class="form-group col-md-6  ">
+                                            <input
+                                            name="nationalid"
+                                            value="National ID:"
+                                            disabled
+                                            class="form-control"
+                                            type="text"
+                                            id="nid"
+                                            placeholder="Enter your national ID">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-6  ">
+                                            <input
+                                            name="comapny"
+                                            value="Telecom company :"
+                                            disabled
+                                            id="company"
+                                            class="form-control"
+                                            type="text"
+                                            placeholder="">
+                                        </div>
+
+
+                                        <div class="form-group col-md-6  ">
+                                            <input
+                                            name="sitename"
+                                            value="Centre station name :"
+                                            disabled
+                                            id="sitename"
+                                            class="form-control"
+                                            type="text"
+                                            placeholder="Enter site name">
+                                        </div>
+                                    </div>
+
+
+
+                                </form>
+
+
+
+                            </div>
+                            <div class="modal-footer">
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC_7OucfzhqVC8ic_RPW0jPy-55OE0y-ZA&sensor=false&libraries=places">
+    </script>
+}

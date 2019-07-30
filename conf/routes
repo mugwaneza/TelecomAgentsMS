@@ -45,7 +45,15 @@ POST /application/submit                controllers.Application.ApplicationSubmi
 
 
 #//Admin reporting and approval
-GET /manage/agents                controllers.ReportingControl.ListAppicants()
+GET /manage/agents                 controllers.ReportingControl.ListAppicants()
+POST /manage/approve                controllers.AdminDashboard.ApproveAgent()
+POST /manage/reject                controllers.AdminDashboard.RejectApplicant()
+GET /manage/decision                controllers.ReportingControl.ApplicationDecison()
+
+#// modification of admin accounts
+GET /admin/modify/account                controllers.ReportingControl.ShowAdmins()
+POST /admin/modify/account                controllers.ReportingControl.UpdateAdmins()
+POST /admin/modify/delete                controllers.ReportingControl.DeleteAdmins()
 
 
 

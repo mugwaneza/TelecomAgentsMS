@@ -28,11 +28,15 @@ public class ApprovedAgents extends Model {
 
     @Column
     @Constraints.Required
-    public String status;
+    public Boolean status;
 
     @Column
     @Constraints.Required
-    public String comment;
+    public String walletnumber;
+
+    @Column
+    @Constraints.Required
+    public String airtimenumber;
 
     public Timestamp approved_at = new Timestamp(new Date().getTime());
 

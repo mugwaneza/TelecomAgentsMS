@@ -104,10 +104,11 @@
                                     </td>
 
                                        <td>
-                                           <input type="submit" value="Reject" class="btn btn-sm btn-danger">
+
+                                           <input type="button" value="Reject" class="btn btn-sm btn-danger reject">
                                        </td>
                                        <td>
-                                           <input type="submit" value="Access" class="btn btn-sm btn-success">
+                                           <input type="submit" value="Accept" class="btn btn-sm btn-success accept">
                                        </td>
 
                                     </tr>
@@ -157,15 +158,15 @@
 
                                    <form class=" mt-5"  id="applicationForm" enctype="multipart/form-data"  >
 
-                                       @*    <div class="row">
+                                          <div class="row">
                                                <div class=" col-md-6 mt-5">
                                                    <div class="form-group   ">
                                                        <div class="col-md-3">
-                                                           <img src="" alt="passpost" id="passportphoto" width="140" height="140">
+                                                           <img  alt="passpost" id="passportphoto" width="140" height="140">
                                                        </div>
                                                    </div>
                                                </div>
-                                           </div>*@
+                                           </div>
 
                                            <div class="row">
                                                <div class=" col-md-6">
@@ -312,6 +313,134 @@
        </div>
   </section>
 
+
+
+@*   Approve dialog *@
+    <section id="">
+        <div class="container">
+            <div class="row">
+                <div class="modal fade" id="approve" tabindex="-1" role="dialog" aria-labelledby="Approval" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title center" id="">Assign Mobile number to be used</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body ">
+
+
+
+                                <form class=" mt-5 col-md-8 offset-2"   method="POST" action="/manage/approve" id="approvalform" autocomplete="off" enctype="multipart/form-data"   >
+
+                                        <input type="hidden" value="" class="form-control" id="userid" name="userid">
+                                        <div class="form-group ">
+                                            <label> Mobile wallet number</label>
+                                            <input
+                                            name="wallet"
+                                            value="Centre station name :"
+                                            id=""
+                                            class="form-control"
+                                            type="number"
+                                            placeholder="Enter  Mobile wallet number">
+                                        </div>
+
+                                        <div class="form-group  ">
+                                            <label> Airtime number</label>
+
+                                            <input
+                                            name="airtime"
+                                            value="Centre station name :"
+                                            id="airtime"
+                                            class="form-control"
+                                            type="number"
+                                            placeholder="Enter airtime number">
+                                        </div>
+                                      <div class="form-group  ">
+
+                                            <input
+                                            value="Assign"
+                                            class="form-control btn btn-success"
+                                            type="submit"
+                                           >
+                                        </div>
+
+
+                                </form>
+
+
+
+                            </div>
+                            <div class="modal-footer">
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <section id="">
+        <div class="container">
+            <div class="row">
+                <div class="modal fade" id="rejectmodel" tabindex="-1" role="dialog" aria-labelledby="rejectmodel" aria-hidden="true">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title center" id="">Would you like to reject this applicant ?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body col-md-8 offset-2">
+
+
+
+                                <form action="/manage/reject"  method="post" id="rejectform">
+                                    <input type="hidden"  name="rejectid" id="rejectid">
+
+                                      <div class="row" >
+                                      <div class="form-group col-md-6 ">
+
+                                            <input
+                                            value="Reject"
+                                            class="form-control btn btn-danger"
+                                            type="submit"
+                                           >
+
+                                        </div>
+                                    <div class="form-group col-md-6">
+
+                                            <input
+                                            value="Cancel"
+                                            class="form-control btn btn-warning"
+                                            type="button"
+                                            data-dismiss="modal"
+                                           >
+                                        </div>
+                                      </div>
+
+                                </form>
+
+
+
+                            </div>
+                            <div class="modal-footer">
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
 
     <script type="text/javascript"
     src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC_7OucfzhqVC8ic_RPW0jPy-55OE0y-ZA&sensor=false&libraries=places">

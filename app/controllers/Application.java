@@ -10,6 +10,7 @@ import play.data.DynamicForm;
 import play.mvc.*;
 
 import scala.concurrent.stm.Source;
+import scala.xml.Null;
 import scalax.file.Path;
 import scalax.io.support.FileUtils;
 import views.html.*;
@@ -53,6 +54,7 @@ public class Application extends Controller {
             else{     // When student has loggedin and has not applied
 
                 return redirect("/application/agent");
+
             }
 
         }else{
@@ -111,7 +113,10 @@ public class Application extends Controller {
            //    create new session
               session("agentlog", id);
 
-               return  redirect("/application/agent");
+//               return  redirect("/application/agent");
+               return redirect("/applied/agent");
+
+
            }
          else {
 
@@ -127,14 +132,17 @@ public class Application extends Controller {
 
 
     // Student application form submit
-    public  static Result ApplicationSubmit() throws IOException {
+    public  static Result ApplicationSubmit(){
 
         String ExistingSession = session().get("agentlog");
         AgentApplication Isapplicant  =AgentApplication.application(ExistingSession);
-        String phone = Isapplicant.phonenumber;
-        String nid = Isapplicant.nid;
 
-        boolean Hasapplied = Isapplicant !=null;
+        String phone =null;
+        String nid =null;
+
+       List<AgentApplication> application = AgentApplication.findApplication.all();
+
+            boolean Hasapplied = Isapplicant !=null;
 
         DynamicForm applicationForm = new DynamicForm().bindFromRequest();
         AgentApplication applicant = new AgentApplication();
@@ -171,34 +179,42 @@ public class Application extends Controller {
 
         //Rename a file
         String photoname = (new Date()).getTime() +"_"+ fileName;
-
-         //Create Files path
-        File Filespath = new File("/uploads/" + photoname);
-        file.renameTo(Filespath); //here you are moving photo to path directory
-
+        File Filespath = new File("\\uploads\\"+photoname);
         applicant.passportphoto = Filespath.getPath() ;
 
+        file.renameTo(Filespath); //here you are moving photo to path directory
 
-          if (Hasapplied){
-              flash("error","applicant already exist");
-              return  badRequest(application_agent.render("error"));
-          }
 
-         else if (phone == applicationForm.get("phone") ){
-              flash("error","Phone number already used");
-              return  badRequest(application_agent.render("error"));
-          }
-         else if (nid == applicationForm.get("nid")){
-              flash("error","Your National ID number already used");
-              return  badRequest(application_agent.render("error"));
-          }
-         else {
-
-              flash("success","Thank you, your application was successfully received, we shall reply you shortly <a href=\"" + routes.Application.AppliedAgent().url()+"\" class=\"btn btn-link\"> Next </a>");
-              applicant.save();
-              return ok(application_agent.render("success"));
-          }
-
+//        if (Hasapplied){
+//              // after find that  user application is  already there
+//              flash("error","applicant already exist");
+//              return  badRequest(application_agent.render("error"));
+//          }
+//          else if (Isapplicant !=null){
+//
+//              // After find that applications exist and check among it if there is not used phone number or  national Id
+//              phone = Isapplicant.phonenumber;
+//              nid = Isapplicant.nid;
+//
+//                 if (!phone.equals("") && phone == applicationForm.get("phone") ){
+//                  flash("error","Phone number already used");
+//                  return  badRequest(application_agent.render("error"));
+//              }
+//              else if ( !nid.equals("") && nid == applicationForm.get("nid")){
+//                  flash("error","Your National ID number already used");
+//                  return  badRequest(application_agent.render("error"));
+//              }
+//
+//             }
+//         else {
+//
+////            If user application is absent and phone and National Id were not used
+//
+//              flash("success","Thank you, your application was successfully received, we shall reply you shortly <a href=\"" + routes.Application.AppliedAgent().url()+"\" class=\"btn btn-link\"> Next </a>");
+//              applicant.save();
+//              return ok(application_agent.render("success"));
+//          }
+        return ok();
 
     }
 
@@ -208,36 +224,45 @@ public class Application extends Controller {
 
       String ExistingSession = session().get("agentlog");
       AgentApplication Isapplicant  =AgentApplication.application(ExistingSession);
-      String firstname = Isapplicant.firstname;
-      String lastname = Isapplicant.lastname;
-      String status = Isapplicant.reject_status;
-      String address = Isapplicant.address;
+      String firstname = null;
+      String lastname = null;
+      String status = null;
+      String address ;
 
-      List<ApprovedAgents> myagent = ApprovedAgents.approved();
-       Boolean IsApproved = myagent !=null;
+      // check if applicant details is existing
+      if (Isapplicant!=null) {
+          firstname = Isapplicant.firstname;
+          lastname = Isapplicant.lastname;
+          status = Isapplicant.reject_status;
+          address = Isapplicant.address;
+          List<ApprovedAgents> myagent = ApprovedAgents.approved();
+          Boolean IsApproved = myagent != null;
 
-      if(!IsApproved){
+          if (status.equals("approved")){
 
 
-          List<AgentApplication> contacts =  AgentApplication.applicationsList(ExistingSession);
+              List<AgentApplication> contacts = AgentApplication.applicationsList(ExistingSession);
 
 
-          flash("approval", "Your Application was approved as <b> Active agent</b> " );
-          System.out.println(IsApproved);
-          return ok(approvedagent_application.render("approval",contacts));
-      }
-      else if(status.equals("rejected")){
+              flash("approval", "Your Application was approved as <b> Active agent</b> ");
+              System.out.println(IsApproved);
+              return ok(approvedagent_application.render("approval", contacts));
+          } else if (!status.equals("") && status.equals("rejected")) {
 
-          flash("rejection", "Dear <b> "+ firstname + " " + lastname +"</b>, Sorry Your Application have been rejected " );
-          return ok(appliedagent.render("rejection"));
-      }
-      else{
+              flash("rejection", "Dear <b> " + firstname + " " + lastname + "</b>, Sorry Your Application have been rejected ");
+              return ok(appliedagent.render("rejection"));
+          }
+          else
+              {
 
-          flash("names", firstname + " " + lastname);
-          //             flash("error", "Invalid email or password <a href=\"" + routes.Application.agentSingin().url()+"\" class=\"btn btn-link\">Log in</a>");
+              flash("names", firstname + " " + lastname);
+              flash("nondecision", "This time your application is pending, wait for feeback Patiently <a href=\"" + routes.Application.logout().url() + "\" class=\"btn btn-link\">Log out</a>");
+              return ok(appliedagent.render("nondecision"));
+          }
 
-          flash("nondecision","This time your application is pending, wait for feeback Patiently <a href=\"" + routes.Application.logout().url() + "\" class=\"btn btn-link\">Log out</a>");
-          return ok(appliedagent.render("nondecision"));
+      }else{
+
+          return redirect(routes.Application.Apply());
       }
   }
 
