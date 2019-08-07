@@ -6,6 +6,7 @@ import models.*;
 import org.mindrot.jbcrypt.BCrypt;
 import play.*;
 import play.api.libs.Files;
+import play.api.mvc.Session;
 import play.data.DynamicForm;
 import play.mvc.*;
 
@@ -64,6 +65,7 @@ public class Application extends Controller {
 
 
     public static Result agentSignupCreate(){
+
         DynamicForm signupForm = new DynamicForm().bindFromRequest();
         AgentsAccounts user = new AgentsAccounts();
         user.fullname =signupForm.field("names").value();
@@ -179,41 +181,41 @@ public class Application extends Controller {
 
         //Rename a file
         String photoname = (new Date()).getTime() +"_"+ fileName;
-        File Filespath = new File("\\uploads\\"+photoname);
+        File Filespath = new File("/uploads/"+photoname);
         applicant.passportphoto = Filespath.getPath() ;
 
         file.renameTo(Filespath); //here you are moving photo to path directory
 
 
-//        if (Hasapplied){
-//              // after find that  user application is  already there
-//              flash("error","applicant already exist");
-//              return  badRequest(application_agent.render("error"));
-//          }
-//          else if (Isapplicant !=null){
-//
-//              // After find that applications exist and check among it if there is not used phone number or  national Id
-//              phone = Isapplicant.phonenumber;
-//              nid = Isapplicant.nid;
-//
-//                 if (!phone.equals("") && phone == applicationForm.get("phone") ){
-//                  flash("error","Phone number already used");
-//                  return  badRequest(application_agent.render("error"));
-//              }
-//              else if ( !nid.equals("") && nid == applicationForm.get("nid")){
-//                  flash("error","Your National ID number already used");
-//                  return  badRequest(application_agent.render("error"));
-//              }
-//
-//             }
-//         else {
-//
-////            If user application is absent and phone and National Id were not used
-//
-//              flash("success","Thank you, your application was successfully received, we shall reply you shortly <a href=\"" + routes.Application.AppliedAgent().url()+"\" class=\"btn btn-link\"> Next </a>");
-//              applicant.save();
-//              return ok(application_agent.render("success"));
-//          }
+        if (Hasapplied){
+              // after find that  user application is  already there
+              flash("error","applicant already exist");
+              return  badRequest(application_agent.render("error"));
+          }
+          else if (Isapplicant !=null){
+
+              // After find that applications exist and check among it if there is not used phone number or  national Id
+              phone = Isapplicant.phonenumber;
+              nid = Isapplicant.nid;
+
+                 if (!phone.equals("") && phone == applicationForm.get("phone") ){
+                  flash("error","Phone number already used");
+                  return  badRequest(application_agent.render("error"));
+              }
+              else if ( !nid.equals("") && nid == applicationForm.get("nid")){
+                  flash("error","Your National ID number already used");
+                  return  badRequest(application_agent.render("error"));
+              }
+
+             }
+         else {
+
+//            If user application is absent and phone and National Id were not used
+
+              flash("success","Thank you, your application was successfully received, we shall reply you shortly <a href=\"" + routes.Application.AppliedAgent().url()+"\" class=\"btn btn-link\"> Next </a>");
+              applicant.save();
+              return ok(application_agent.render("success"));
+          }
         return ok();
 
     }
@@ -266,7 +268,26 @@ public class Application extends Controller {
       }
   }
 
+    public static List<AgentsInquiry> inquiry;
+    //  Chat with interface for user
+    public static Result ShowChat(){
 
+        // get the list of all message sent by agent and his /her replies
+       inquiry = AgentsInquiry.FindAgentChat(session().get("agentlog"));
+        return ok(agent_chat.render("", inquiry));
+    }
+
+       // When an agent sends achat
+    public static Result SendChat(){
+        DynamicForm signupForm = new DynamicForm().bindFromRequest();
+        AgentsInquiry user = new AgentsInquiry();
+        String agentid = session().get("agentlog");
+        user.agent =ApprovedAgents.approved.where().eq("applicant_id",agentid).findUnique();
+        user.message =signupForm.field("message").value();
+        user.save();
+        flash("success"," Your message was sent, thanks " );
+        return ok(agent_chat.render("success", inquiry));
+    }
 
 
     /**

@@ -9,10 +9,11 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
-import views.html.adminaccounts;
-import views.html.signin_admin;
-import views.html.signin_agent;
-import views.html.signup_agent;
+import views.html.*;
+
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
 
 import static play.data.Form.form;
 
@@ -274,4 +275,38 @@ public class AdminDashboard extends Controller {
     }
 
 
+    public static Result Inquiries(){
+
+        return ok(admin_agentinquiries.render("", "" ));
     }
+    public static Result ChatDetails(String id){
+        List<AgentsInquiry> inquiry = AgentsInquiry.agentChat(id);
+
+        String ur = request().uri();
+        System.out.println(ur);
+        return ok(admin_chatposts.render("", inquiry));
+    }
+
+    //    when an admin replies to the agent
+    public static Result ReplyChat(){
+        DynamicForm signupForm = new DynamicForm().bindFromRequest();
+        String adminid = session().get("adminlog");
+        String reply =signupForm.field("message").value();
+        String chatid =signupForm.field("chatid").value();
+
+        Timestamp replytime = new Timestamp(new Date().getTime());
+        SqlUpdate update = Ebean. createSqlUpdate("update inquiry set admin_id=:admin_id, reply=:reply, reply_status=:reply_status,replied_at=:replied_at  WHERE id=:id")
+                .setParameter("admin_id", adminid)
+                .setParameter("reply", reply)
+                .setParameter("reply_status", true)
+                .setParameter("replied_at", replytime)
+                .setParameter("id", chatid);
+        int rowsCount = update.execute();
+
+        flash("success", "Reply successfully sent");
+        return ok(admin_agentinquiries.render("success", ""));
+    }
+
+
+
+}

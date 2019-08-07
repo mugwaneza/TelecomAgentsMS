@@ -199,6 +199,15 @@ $('#applicationForm').validate({
 });
 
 
+$('#agentchat').validate({
+
+    rules : {
+        message : {
+            required : true,
+        }
+
+    }
+});
 
 
 

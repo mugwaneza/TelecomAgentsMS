@@ -1,0 +1,58 @@
+@(message: String, id : String)
+@main_dashboard("TAMS" ) {
+
+    @views.html.navigation("message")
+
+
+    <div class="content-wrapper py-3">
+        <div class="container-fluid">
+            <div class="row trak_map_page">
+                <div class="page-header" style="background-image: url('@routes.Assets.at("images/vehicle3.jpg")')">
+
+                    <div class="container">
+                        <div class="col-md-12"><br>
+
+                            <h2 class="text-success ">Agents requests / suggestions list</h2>
+
+
+                            <div class="chats mt-5 col-md-10" >
+
+
+                                    <ul class="list-group  list-group-horizontal-sm">
+
+                                        @for(AgentsInquiries <- AgentsInquiry.FindChatSender){
+                                         <a href="@routes.AdminDashboard.ChatDetails(id)@AgentsInquiries.agent.applicant.id" class="mylink" >
+                                                  <input type="hidden" value="@AgentsInquiries.agent.applicant.id" id="link">
+                                                <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action list-group-item-default">
+                                                @AgentsInquiries.agent.applicant.agent.fullname
+                                      @*<span class="badge badge-danger badge-pill">2</span>*@
+
+                                            </li>
+                                         </a>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!-- /.container-fluid -->
+    </div>
+        <!-- /.content-wrapper -->
+
+    <a class="scroll-to-top rounded" href="#">
+        <i class="fa fa-chevron-up"></i>
+    </a>
+
+    <script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC_7OucfzhqVC8ic_RPW0jPy-55OE0y-ZA&sensor=false&libraries=places">
+    </script>
+
+}

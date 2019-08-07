@@ -1,0 +1,90 @@
+@(message: String )(inquiry : List[AgentsInquiry])
+@main_dashboard("approved" ) {
+    @views.html.navigation("approval")
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <div class="row ">
+                <div class="page-header" style="background-image: url('@routes.Assets.at("images/vehicle3.jpg")')">
+
+                    <div class="container">
+                        <div class="col-md-10"><br>
+
+                            <div class=" mt-5"  >
+                                <h3 class="offset-2 text-primary">Agent request and feedback</h3>
+
+                                <div class="chats mt-5 col-md-10" >
+
+                                    <ul class="list-group  list-group-horizontal-sm">
+
+                                           @for(inquiry <- inquiry){
+                                            <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action list-group-item-info">
+                                                <h5>@inquiry.agent.applicant.agent.fullname: </h5> @inquiry.message <span>&nbsp;</span> <br> @inquiry.created_at
+                                            </li>
+
+
+                                        @if( inquiry.reply_status==true){
+                                          <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action list-group-item-primary">
+                                                <h5>You: </h5> @inquiry.reply <span>&nbsp;</span> <br> @inquiry.replied_at
+                                           </li>
+                                           }
+                                           }
+                                    </ul>
+                                    <form class="col-sm-offset-2" action="/agent/inquiry/reply" autocomplete="off" id="" method="POST" >
+
+                                        @if(message == "error") {
+                                            <div class="alert alert-danger col-md-8 offset-1" role="alert">
+                                            @flash.get("error")
+                                            </div>
+
+                                        }
+                                        @if(message=="success"){
+
+                                            <div class="alert alert-success col-md-8 offset-1 mt-5 alert-dismissable" role="alert">
+                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                @flash.get("success")
+                                            </div>
+                                        }
+
+                                        <div class="form-group row offset-1 mt-5">
+
+                                            <input type="hidden" name="chatid" class="chatid"  id="chatid">
+
+                                            <div class="col-sm-10">
+                                                <input
+                                                name="message"
+                                                id="message"
+                                                class="form-control message"
+                                                type="text"
+                                                placeholder="Enter Message description"/>
+                                            </div>
+                                            <input type="submit" class="btn btn-success btnsub" value="Reply">
+
+                                        </div>
+
+                                    </form>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!-- /.container-fluid -->
+    </div>
+        <!-- /.content-wrapper -->
+
+    <a class="scroll-to-top rounded" href="#">
+        <i class="fa fa-chevron-up"></i>
+    </a>
+
+    <script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC_7OucfzhqVC8ic_RPW0jPy-55OE0y-ZA&sensor=false&libraries=places">
+    </script>
+
+}

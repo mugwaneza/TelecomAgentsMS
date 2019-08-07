@@ -2,27 +2,26 @@ package models;
 
 
 import play.data.validation.Constraints;
+import play.db.ebean.Model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "inquiry")
-public class AgentsInquiry {
+public class AgentsInquiry  extends Model {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
     public Long id;
-
 
     @ManyToOne(cascade = CascadeType.ALL)
     public ApprovedAgents agent ;
 
     @ManyToOne(cascade = CascadeType.ALL)
     public AdminAccount admin ;
-
-
 
     @Column
     @Constraints.Required
@@ -34,12 +33,43 @@ public class AgentsInquiry {
 
    @Column
     @Constraints.Required
-    public String reply_status;
+    public boolean reply_status;
 
     @Column
     @Constraints.Required
     public String replied_at;
 
-    public Timestamp approved_at = new Timestamp(new Date().getTime());
+    public Timestamp created_at = new Timestamp(new Date().getTime());
+
+    public static Model.Finder<Long,AgentsInquiry> InquiryFinder = new  Model.Finder<>(Long.class,AgentsInquiry.class);
+
+
+    // chats in agent dashboard
+    public static List<AgentsInquiry> FindAgentChat(String agentid)
+    {
+        List<AgentsInquiry> agentinq;
+        agentinq = AgentsInquiry.InquiryFinder.where().eq("agent_id",agentid).orderBy("id desc").findList();
+
+        return agentinq;
+    }
+
+      // summary list of inquiry sender in admin
+    public static List<AgentsInquiry> FindChatSender(){
+        List<AgentsInquiry> sender;
+        sender = InquiryFinder.orderBy("id desc").findList();
+        return sender;
+    }
+
+    // Detail chat of each message sender in admin
+    public static List<AgentsInquiry> agentChat(String id)
+    {
+        List<AgentsInquiry> agentc ;
+        agentc = InquiryFinder.where().eq("agent_id", id).findList();
+        return  agentc;
+    }
+
+
+
+
 
 }

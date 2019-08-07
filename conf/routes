@@ -15,6 +15,9 @@ GET     /dashboard/district       controllers.AdminDashboard.DashboardDistrict()
 GET     /dashboard/sector       controllers.AdminDashboard.DashboardSector()
 GET     /dashboard/cell       controllers.AdminDashboard.DashboardCell()
 GET     /manage/accounts       controllers.AdminDashboard.DashboardAdminAccounts()
+GET     /dashboard/agent/inquiry       controllers.AdminDashboard.Inquiries()
+
+GET   /dashboard/agent/posts/details/:id   controllers.AdminDashboard.ChatDetails(id : String)
 
 
 #  Signin && signup routes
@@ -42,6 +45,9 @@ POST     /signin/agent/create                controllers.Application.agentSignin
 GET /application/agent                controllers.Application.Apply()
 GET /applied/agent                controllers.Application.AppliedAgent()
 POST /application/submit                controllers.Application.ApplicationSubmit()
+GET /agent/inquiry                controllers.Application.ShowChat()
+POST /agent/inquiry                controllers.Application.SendChat()
+POST /agent/inquiry/reply                controllers.AdminDashboard.ReplyChat()
 
 
 #//Admin reporting and approval

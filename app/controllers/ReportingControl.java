@@ -80,4 +80,13 @@ public class ReportingControl extends Controller {
 
         return ok(views.html.admin_manamentofaccounts.render("success"));
     }
+
+    public static Result SendMessage(){
+
+
+        return ok();
+    }
+
+
+
 }

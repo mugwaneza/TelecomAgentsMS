@@ -117,3 +117,18 @@ $(".deletebtn").click(function() {
 });
 
 
+     $(".mylink").click(function () {
+         var data = $("#link").val();
+         localStorage.setItem("chatid",data )
+
+
+     });
+
+
+     $(".btnsub").click(function () {
+       var chatid = localStorage.getItem("chatid")
+         $("#chatid").val(chatid);
+
+     });
+
+

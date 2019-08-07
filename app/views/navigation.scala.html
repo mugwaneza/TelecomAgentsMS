@@ -4,7 +4,7 @@
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarExample" aria-controls="navbarExample" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand " href="">Welcome</a>
+    <a class="navbar-brand " href="/">Welcome</a>
     <div class="collapse navbar-collapse" id="navbarExample">
         <ul class="sidebar-nav navbar-nav">
             @if(session.get("agentlog")){
@@ -52,6 +52,17 @@
                         </li>
 
                     </ul>
+
+            <li class="nav-item">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
+                href="#collapseMessage"><i class="fa fa-fw fa-comment"></i><i  class="fa  fa-fw fa-caret-right"></i>Support</a>
+                <ul class="sidebar-second-level collapse" id="collapseMessage">
+                    <li>
+                        <a href="/dashboard/agent/inquiry"><i  class="fa  fa-fw fa-caret-down"></i>users Inquiry</a>
+                    </li>
+                </ul>
+             </li>
+
                 </li>
 
             }
@@ -61,7 +72,7 @@
 
 
                  <li class="nav-item active">
-                     <a class="nav-link" href="/dashboard"><i class=""></i>Agent Dashboard</a>
+                     <a class="nav-link" href="/signin/agent"><i class=""></i>Agent Dashboard</a>
                  </li>
 
                          <li class="nav-item">
@@ -69,7 +80,7 @@
                              href="#collapseComponents"><i class="fa fa-fw fa-briefcase"></i> Agent Menu</a>
                              <ul class="sidebar-second-level collapse" id="collapseComponents">
                                  <li>
-                                     <a href="">Agent Inquiry</a>
+                                     <a href="/agent/inquiry">Agent Inquiry</a>
                                  </li>
 
                              </ul>

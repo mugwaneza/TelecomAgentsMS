@@ -52,9 +52,9 @@ create table inquiry (
   admin_id                  bigint,
   message                   varchar(255),
   reply                     varchar(255),
-  reply_status              varchar(255),
+  reply_status              tinyint(1) default 0,
   replied_at                varchar(255),
-  approved_at               datetime,
+  created_at                datetime,
   constraint pk_inquiry primary key (id))
 ;
 
