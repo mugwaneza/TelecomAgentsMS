@@ -97,12 +97,22 @@
                                             @applicant.agromeration
                                             </td>
 
+                                         <td class="walletnumber"  hidden="true">
+                                            @for(x : ApprovedAgents <- applicant.Approved_agentsList()){
+                                            <a href="">@x.walletnumber</a>
+
+                                            </td>
+                                            <td class="airtimenumber"  hidden="true">
+                                            <a href="">@x.airtimenumber</a>
+                                            }
+                                            </td>
+
                                             <td>
                                                 <button type="button" class="btn btn-primary btn-sm detail" data-toggle="modal" data-target="#detail">Detail</button>
                                             </td>
 
                                             <td >
-                                                <span class="text-primary">
+                                                <span class="text-warning font-bold">
                                                     @applicant.reject_status
                                                 </span>
                                             </td>
@@ -173,6 +183,19 @@
                                         <div class="col-md-6">
                                             <div class="form-group   ">
                                                 <input  name="sector" disabled class="form-control" id="sector"  type="disabled">
+                                            </div>
+                                        </div>
+                                    </div>
+                                           <div class="row">
+                                        <div class=" col-md-6">
+                                            <div class="form-group   ">
+                                                <input  name="walletnumber" value="" disabled class="form-control text-warning" id="walletno"  type="disabled">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 ">
+                                            <div class="form-group   ">
+                                                <input  name="airtimenumber" value="" disabled class="form-control text-warning" id="airtimeno"  type="disabled">
                                             </div>
                                         </div>
                                     </div>

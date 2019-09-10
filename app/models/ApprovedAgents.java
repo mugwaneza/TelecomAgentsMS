@@ -20,7 +20,7 @@ public class ApprovedAgents extends Model {
 
 
     @ManyToOne(cascade = CascadeType.ALL)
-    public AgentApplication applicant ;
+    public AgentApplication applicant;
 
     @ManyToOne(cascade = CascadeType.ALL)
     public AdminAccount admin ;

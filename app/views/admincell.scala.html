@@ -30,7 +30,7 @@
                                     <div class="col-sm-10">
                                         <select  name="sector" class="form-control">
                                             <option value=""> -- select sector -- </option>
-                                            @for( i <- Sector.findSectors ){
+                                            @for( i <- Sector.findSectors() ){
                                                 <option value="@i.id">@i.sector</option>
                                             }
                                         </select>

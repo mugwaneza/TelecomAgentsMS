@@ -8,6 +8,7 @@ import play.*;
 import play.api.libs.Files;
 import play.api.mvc.Session;
 import play.data.DynamicForm;
+import play.libs.Json;
 import play.mvc.*;
 
 import scala.concurrent.stm.Source;
@@ -128,7 +129,16 @@ public class Application extends Controller {
            }
     }
 
+    public static Result list(){
+        return ok(Json.toJson(District.findDistrict()));
+    }
+
     public  static Result Apply(){
+
+        // get the list of the sectors according to selected district
+//        Sector district = new Sector();
+//        district.findSectors(id);
+//        List<Sector> Sectors = Sector.findSectors(id);
     return ok(application_agent.render(""));
     }
 
@@ -177,15 +187,11 @@ public class Application extends Controller {
 
         // get file name from uploaded
         String fileName = uploadedFile.getFilename();
-        File file = uploadedFile.getFile();
-
+        File SourceUploadedfile = uploadedFile.getFile();
         //Rename a file
         String photoname = (new Date()).getTime() +"_"+ fileName;
-        File Filespath = new File("/uploads/"+photoname);
-        applicant.passportphoto = Filespath.getPath() ;
-
-        file.renameTo(Filespath); //here you are moving photo to path directory
-
+            File DestinationFilespath = new File("public/uploads/"+ photoname);
+            applicant.passportphoto = new File("/uploads/"+ photoname).getPath() ;
 
         if (Hasapplied){
               // after find that  user application is  already there
@@ -213,7 +219,9 @@ public class Application extends Controller {
 //            If user application is absent and phone and National Id were not used
 
               flash("success","Thank you, your application was successfully received, we shall reply you shortly <a href=\"" + routes.Application.AppliedAgent().url()+"\" class=\"btn btn-link\"> Next </a>");
-              applicant.save();
+
+            SourceUploadedfile.renameTo(DestinationFilespath); //here you are moving photo to path directory
+            applicant.save();
               return ok(application_agent.render("success"));
           }
         return ok();

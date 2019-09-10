@@ -19,7 +19,6 @@
 
                             }
                             @if(message=="success"){
-
                                 <div class="alert alert-success col-md-6 offset-1" role="alert">
                                 @flash.get("success")
                                 </div>
@@ -29,9 +28,9 @@
 
 
                             <div class="col-sm-offset-1" id="tablediv">
-                         <table class="table   table-bordered table-hover table-striped ">
+                            @if(AgentApplication.applicant() == null){
 
-
+                        <table class="table   table-bordered table-hover table-striped ">
                         <thead>
                             <tr class="bg-inverse text-white">
                             <th>id</th>
@@ -73,30 +72,31 @@
 
                                        </td>
 
-                                       <td class="district" hidden>
+
+                                     <td class="district" hidden>
                                            @applicant.district.district
-                                       </td>
-                                       <td class="sector" hidden>
-                                           @applicant.sector.sector
-                                       </td>
-                                       <td class="cell" hidden>
-                                           @applicant.cell.cell
-                                       </td>
+                                      </td>
+                                   <td class="sector" hidden>
+                                       applicant.sector.sector
+                                        </td>
+                                      <td class="cell" hidden>
+                                            @applicant.cell.cell
+                                      </td>
                                        <td class="nationality" hidden>
                                            @applicant.nationality
-                                       </td>
+                                        </td>
                                           <td class="nid" hidden>
                                                @applicant.nid
                                            </td>
-                                          <td class="company" hidden>
-                                               @applicant.company
-                                           </td>
-                                         <td class="passportphoto" hidden>
+                                         <td class="company" hidden>
+                                              @applicant.company
+                                        </td>
+                                      <td class="passportphoto" hidden>
                                                @applicant.passportphoto
-                                           </td>
+                                         </td>
                                        <td class="agromeration" hidden>
-                                               @applicant.agromeration
-                                           </td>
+                                              @applicant.agromeration
+                                          </td>
 
                                     <td>
                                         <button type="button" class="btn btn-primary btn-sm detail" data-toggle="modal" data-target="#detail">Detail</button>
@@ -113,10 +113,12 @@
 
                                     </tr>
                                }
-
-
                          </table>
-
+                            }else{
+                                <div class="col-md-6">
+                                    <p class="mt-5 ml-5">Sorry you have no new application</p>
+                                </div>
+                            }
 
                                 </div>
                             </div>

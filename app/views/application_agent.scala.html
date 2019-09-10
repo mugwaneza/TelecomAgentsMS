@@ -29,7 +29,7 @@
                                 <div class="row">
                                 <div class=" col-md-6">
                                 <div class="form-group   ">
-                                        <select  name="district" class="form-control">
+                                        <select  name="district" id="distri" class="form-control" onchange="changeFunc();">
                                             <option value=""> -- select district -- </option>
                                             @for(i <- District.findDistrict()) {
                                                 <option value="@i.id">@i.district</option>
@@ -46,6 +46,7 @@
                                                 <option value="@i.id">@i.sector</option>
                                             }
                                         </select>
+                                    <div id="result"></div>
                                 </div>
                                 </div>
                                 </div>

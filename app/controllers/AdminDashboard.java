@@ -134,15 +134,11 @@ public class AdminDashboard extends Controller {
         cell.cell = mycell;
         cell.description = myform.field("description").value();
         if ((cell.isCellExist(mycell)) == null){
-
             cell.save();
-
             flash("success", mycell + " successfully saved " );
             return ok(views.html.admincell.render("success"));
         }
         else {
-
-
             flash("error", mycell + " cell already exist " );
             return badRequest(views.html.admincell.render("error"));
         }
@@ -156,28 +152,25 @@ public class AdminDashboard extends Controller {
             // Find user session
             boolean Session =  session().get("adminlog") !=null;
             if(Session){
-
             return redirect(routes.AdminDashboard.DashboardIndex());
-            }else{
+             }else{
                 return ok(signin_admin.render("welcome"));
-            }
+              }
          }
 
 //         Signin  admin function
 
     public static Result adminSignCreate(){
 
-
         // get form's email and password
         DynamicForm myloginForm = new DynamicForm().bindFromRequest();
         String email = myloginForm.get("email");
         String Inpassword = myloginForm.get("password");
 
+          //Access admin  model
+         AdminAccount admin  = new AdminAccount();
 
-        //Access admin  model
-        AdminAccount admin  = new AdminAccount();
-
-        // fetch data from agent table using input email method
+          // fetch data from agent table using input email method
          AdminAccount user = admin.isEmailExist(email);
 
         // Decrypt hashed password and compare it to input password
@@ -188,11 +181,10 @@ public class AdminDashboard extends Controller {
             long myid = user.id;
             String id =  Long.toString(myid);
 
-            // Clear existing session
-            session().clear();
-
-            //    create new session
-            session("adminlog", id);
+               // Clear existing session
+             session().clear();
+                 //create new session
+               session("adminlog", id);
 
             return  redirect("/dashboard");
         }
@@ -202,7 +194,6 @@ public class AdminDashboard extends Controller {
             return  ok(signin_admin.render("error"));
         }
     }
-
 
 
 
@@ -255,7 +246,6 @@ public class AdminDashboard extends Controller {
                 .setParameter("reject_status", "approved")
                 .setParameter("id", applicantid);
          int rows = update.execute();
-
         return redirect(routes.ReportingControl.ListAppicants());
     }
 

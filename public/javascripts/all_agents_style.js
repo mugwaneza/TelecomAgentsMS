@@ -19,6 +19,8 @@ $(".detail").click(function() {
     var $company = $row.find(".company").text(); // Find the text
     var $sitename = $row.find(".sitename").text(); // Find the text
     var $passportphoto = $row.find(".passportphoto").text(); // Find the text
+    var $airtimeno = $row.find(".airtimenumber").text(); // Find the text
+    var $wallet = $row.find(".walletnumber").text(); // Find the text
 
 
 
@@ -36,6 +38,8 @@ $(".detail").click(function() {
     $("#nid").val("National ID : " + $.trim($nid));
     $("#company").val("Company : " + $.trim($company));
     $("#sitename").val("Site name : " + $.trim($sitename));
+    $("#walletno").val("Wallet number : " + $.trim($wallet));
+    $("#airtimeno").val("Airtime number : " + $.trim($airtimeno));
 
      var photopath = $.trim($passportphoto);
      var path = photopath.replace("uploads\\", "uploads/")
@@ -53,19 +57,6 @@ $(".accept").click(function() {
     var userid = $("#userid").val($.trim($rowId));
 
     // var data = $("#approvalform").serialize();
-
-    // $.ajax(
-    //  {
-    //
-    //      type: "POST",
-    //      url:"/applicant/approve",
-    //      data: data,
-    //      success:function(data) {
-    //
-    //      }
-    //
-    //  });
-
 
 });
 
@@ -120,8 +111,6 @@ $(".deletebtn").click(function() {
      $(".mylink").click(function () {
          var data = $("#link").val();
          localStorage.setItem("chatid",data )
-
-
      });
 
 
@@ -130,5 +119,32 @@ $(".deletebtn").click(function() {
          $("#chatid").val(chatid);
 
      });
+
+
+      // when district option is selected get its sectors
+    function changeFunc(){
+       var selectBox = document.getElementById("distri");
+       var district_id = selectBox.options[selectBox.selectedIndex].value;
+        $.ajax(
+            {
+             type: "get",
+             url:"/manage/list/"+district_id,
+             data: district_id,
+             success:function(data) {
+
+                 data.forEach(function (v) {
+                    $("#data").html(v.passportphoto);
+                 });
+
+                 $("#div").html(data.passportphoto);
+
+                     $('#result').html(data);
+             }
+         });
+
+    }
+
+
+
 
 

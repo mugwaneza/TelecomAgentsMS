@@ -36,7 +36,11 @@ public class Sector extends Model {
         return InfoSectors.all();
     }
 
-       public static Sector isSectorExist(String sector) {
+    public static List<Sector> findS(Long id) {
+        return InfoSectors.where().eq("district_id", id).findList();
+    }
+
+    public static Sector isSectorExist(String sector) {
         return  InfoSectors.where()
                 .eq("sector",sector).findUnique();
     }

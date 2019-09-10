@@ -1,13 +1,20 @@
 package models;
 
+import com.avaje.ebean.Ebean;
 import com.avaje.ebean.Expr;
 import com.avaje.ebean.ExpressionList;
+import com.avaje.ebean.SqlUpdate;
+import com.avaje.ebean.annotation.Formula;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import play.api.db.DB;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
-import sun.management.Agent;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -78,8 +85,10 @@ public class AgentApplication extends Model {
     @Constraints.Required
     public String passportphoto;
 
-    public Timestamp Created_at = new Timestamp(new Date().getTime());
+    @OneToMany(mappedBy = "applicant")
+    public List<ApprovedAgents> agents = new ArrayList<>();
 
+    public Timestamp Created_at = new Timestamp(new Date().getTime());
 
     public static Model.Finder<Long, AgentApplication> findApplication = new Model.Finder<>(Long.class,AgentApplication.class);
 
@@ -88,25 +97,23 @@ public class AgentApplication extends Model {
         return findApplication.where().eq("agent_id", session).findList();
     }
 
+    // the list of non approved from approved agents
+    public List<ApprovedAgents> Approved_agentsList(){
+        return ApprovedAgents.approved.where().eq("applicant.id",id).eq("status",true).findList();
+    }
+
     public  static  AgentApplication application (String session){
         return findApplication.where().eq("agent_id", session).findUnique();
     }
 
- // get the list of all applicants before decision
+      // get the list of all applicants before decision
     public static List<AgentApplication> applicant(){
-
-//        return findApplication.wher  e().not(Expr.eq("reject_status", "rejected")).or(Expr.not(Expr.eq("reject_status","rejected"))).findList();
         return findApplication.where().eq("reject_status", "0").findList();
     }
 
-
-    // get the list of all applicants after decision
-    public static List<AgentApplication> appliedAgents(){
-
-        return findApplication.where().ne("reject_status", "0").findList();
+     // get the list of all applicants after decision
+     public static List<AgentApplication> appliedAgents(){
+     return findApplication.where().ne("reject_status", "0").findList();
     }
-
-
-
 
 }
