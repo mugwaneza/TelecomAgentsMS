@@ -122,27 +122,50 @@ $(".deletebtn").click(function() {
 
 
       // when district option is selected get its sectors
-    function changeFunc(){
+     function changeFunc(){
        var selectBox = document.getElementById("distri");
        var district_id = selectBox.options[selectBox.selectedIndex].value;
-        $.ajax(
+
+         $('#sector').empty();
+
+         $.ajax(
             {
-             type: "get",
-             url:"/manage/list/"+district_id,
+             type: "GET",
+             url:"/agent/sectors/"+district_id,
              data: district_id,
              success:function(data) {
 
                  data.forEach(function (v) {
-                    $("#data").html(v.passportphoto);
+
+                     $('#sector').append($('<option></option>').val(v.id).html(v.sector));
                  });
-
-                 $("#div").html(data.passportphoto);
-
-                     $('#result').html(data);
+                 // $("#div").html(data.passportphoto);
+                 //     $('#result').html(data);
              }
          });
-
     }
+
+
+   // when sector option is selected get its cells
+ function changeFunc2(){
+    var selectBox = document.getElementById("cell");
+    var cellid = selectBox.options[selectBox.selectedIndex].value;
+
+    $('#sector').empty();
+
+    $.ajax(
+        {
+            type: "GET",
+            url:"/agent/cells/"+cellid,
+            data: cellid,
+            success:function(data) {
+                data.forEach(function (v) {
+                    $('#cell').append($('<option></option>').val(v.id).html(v.cell));
+                });
+
+            }
+        });
+        }
 
 
 

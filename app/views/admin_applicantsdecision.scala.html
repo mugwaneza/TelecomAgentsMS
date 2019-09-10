@@ -29,6 +29,9 @@
 
 
                             <div class="col-sm-offset-1" id="tablediv">
+
+                            @if(AgentApplication.appliedAgents() == null ) {
+
                                 <table class="table   table-bordered table-hover table-striped ">
 
 
@@ -121,9 +124,15 @@
                                     }
 
                                 </table>
+                                 }else{
+                        <div class="col-md-6">
+                            <p class="mt-5 ml-5">Sorry you have no approved/rejected application</p>
+                        </div>
+                        }
 
 
-                            </div>
+
+</div>
                         </div>
 
                     </div>

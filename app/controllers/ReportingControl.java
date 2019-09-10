@@ -82,8 +82,6 @@ public class ReportingControl extends Controller {
     }
 
     public static Result SendMessage(){
-
-
         return ok();
     }
 

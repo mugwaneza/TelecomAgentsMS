@@ -39,6 +39,7 @@ public class Application extends Controller {
 
       // Display agent signin form
     public static  Result agentSingin(){
+        session().clear();
 
         // Find user session
         boolean Session =  session().get("agentlog") !=null;
@@ -79,6 +80,7 @@ public class Application extends Controller {
         if ((user.isEmailExist(email) ) == null){
             user.save();
             flash("success", "successfully registered, go back to login");
+            session().clear();
             return ok(views.html.signup_agent.render("success"));
         }
         else {
@@ -96,7 +98,6 @@ public class Application extends Controller {
         DynamicForm myloginForm = new DynamicForm().bindFromRequest();
         String email = myloginForm.get("email");
         String Inpassword = myloginForm.get("password");
-
 
         //Access agentaccount model
         AgentsAccounts agentaccount  = new AgentsAccounts();
@@ -129,16 +130,10 @@ public class Application extends Controller {
            }
     }
 
-    public static Result list(){
-        return ok(Json.toJson(District.findDistrict()));
-    }
+
 
     public  static Result Apply(){
 
-        // get the list of the sectors according to selected district
-//        Sector district = new Sector();
-//        district.findSectors(id);
-//        List<Sector> Sectors = Sector.findSectors(id);
     return ok(application_agent.render(""));
     }
 
@@ -308,5 +303,15 @@ public class Application extends Controller {
         return Results.redirect("/");
     }
 
+
+    public static Result GetSectors(Long id){
+        // get the list of the sectors according to selected district and pass it to json
+      return ok(Json.toJson(Sector.ResultSectors(id)));
+     }
+
+     public static Result GetCells(Long id){
+        // get the list of the cells according to selected sector and pass it to json
+      return ok(Json.toJson(Cell.ResultCells(id)));
+     }
 
 }

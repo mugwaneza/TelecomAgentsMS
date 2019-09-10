@@ -53,7 +53,6 @@ POST /agent/inquiry/reply                controllers.AdminDashboard.ReplyChat()
 
 #//Admin reporting and approval
 GET /manage/agents                 controllers.ReportingControl.ListAppicants()
-GET /manage/list/                 controllers.Application.list()
 POST /manage/approve                controllers.AdminDashboard.ApproveAgent()
 POST /manage/reject                controllers.AdminDashboard.RejectApplicant()
 GET /manage/decision                controllers.ReportingControl.ApplicationDecison()
@@ -63,8 +62,9 @@ GET /admin/modify/account                controllers.ReportingControl.ShowAdmins
 POST /admin/modify/account                controllers.ReportingControl.UpdateAdmins()
 POST /admin/modify/account                controllers.ReportingControl.UpdateAdmins()
 
-
-GET /test/:id                controllers.TestController.test(id :Long)
+#get the lists using json and js
+GET /agent/sectors/:id                controllers.Application.GetSectors(id :Long)
+GET /agent/cells/:id                controllers.Application.GetCells(id :Long)
 
 
 

@@ -47,6 +47,10 @@ public class Cell extends Model {
     return InfoCell.all();
 }
 
+    // get the list of cell by id of selected district
+    public static List<Cell> ResultCells(Long id) {
+        return InfoCell.where().eq("sector_id", id).findList();
+    }
 
 
 }

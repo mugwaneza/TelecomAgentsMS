@@ -2,6 +2,8 @@ package models;
 
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
+import play.libs.Json;
+import play.mvc.Result;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -35,8 +37,8 @@ public class Sector extends Model {
     public static List<Sector> findSectors() {
         return InfoSectors.all();
     }
-
-    public static List<Sector> findS(Long id) {
+      // get the list of sector by id of selected district
+    public static List<Sector> ResultSectors(Long id) {
         return InfoSectors.where().eq("district_id", id).findList();
     }
 

@@ -40,11 +40,8 @@
 
                                 <div class="col-md-6">
                                 <div class="form-group   ">
-                                        <select  name="sector" class="form-control">
-                                            <option value=""> -- select sector -- </option>
-                                            @for(i <- Sector.findSectors()) {
-                                                <option value="@i.id">@i.sector</option>
-                                            }
+                                        <select  name="sector" id="sector"  class=" sector form-control" onchange="changeFunc2();">
+                                        <option  value=""> -- select sector -- </option>
                                         </select>
                                     <div id="result"></div>
                                 </div>
@@ -53,11 +50,8 @@
 
                                    <div class="row">
                                    <div class="form-group col-md-6  ">
-                                        <select  name="cell" class="form-control">
+                                        <select  name="cell" id="cell" class="form-control cell">
                                             <option value=""> -- select cell -- </option>
-                                            @for(i <- Cell.findCells()) {
-                                                <option value="@i.id">@i.cell</option>
-                                            }
                                         </select>
                                 </div>
 
