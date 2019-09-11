@@ -28,7 +28,7 @@
 
 
                             <div class="col-sm-offset-1" id="tablediv">
-                            @if(AgentApplication.applicant() == null){
+                            @if(AgentApplication.applicant() != null && !AgentApplication.applicant().isEmpty()){
 
                         <table class="table   table-bordered table-hover table-striped ">
                         <thead>

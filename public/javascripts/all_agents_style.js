@@ -127,6 +127,7 @@ $(".deletebtn").click(function() {
        var district_id = selectBox.options[selectBox.selectedIndex].value;
 
          $('#sector').empty();
+         $('#cell').empty();
 
          $.ajax(
             {
@@ -135,8 +136,10 @@ $(".deletebtn").click(function() {
              data: district_id,
              success:function(data) {
 
+              $('#sector').append($('<option></option>').val("").html(" -- select sector -- "));
                  data.forEach(function (v) {
 
+                       // Append all fetched sectors to sector's dropdown
                      $('#sector').append($('<option></option>').val(v.id).html(v.sector));
                  });
                  // $("#div").html(data.passportphoto);
@@ -147,18 +150,20 @@ $(".deletebtn").click(function() {
 
 
    // when sector option is selected get its cells
- function changeFunc2(){
-    var selectBox = document.getElementById("cell");
+   function changeFunc2(){
+    var selectBox = document.getElementById("sector");
     var cellid = selectBox.options[selectBox.selectedIndex].value;
 
-    $('#sector').empty();
-
+    $('#cell').empty();
     $.ajax(
         {
             type: "GET",
             url:"/agent/cells/"+cellid,
             data: cellid,
             success:function(data) {
+
+       $('#cell').append($('<option></option>').val("").html(" -- select cell -- "));
+       // Append all fetched sectors to cell's dropdown
                 data.forEach(function (v) {
                     $('#cell').append($('<option></option>').val(v.id).html(v.cell));
                 });

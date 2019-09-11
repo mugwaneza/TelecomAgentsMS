@@ -9,9 +9,52 @@
                 <div class="page-header" style="background-image: url('@routes.Assets.at("images/vehicle3.jpg")')">
 
                     <div class="container">
-                        <div class="col-md-9"><br>
+
+                        <div class="col-md-6">
+                        <div class="form-group offset-3">
+                            <input type="text" class="form-control search" id="search" placeholder="search for an agent"  >
+                        </div>
+                        </div>
+
+@*                         Section for results of search*@
+                        <div class="searched col-md-9">
+                            <table class="table   table-bordered table-hover table-striped ">
+                            <thead>
+                                <tr class="bg-warning text-white">
+                                    <th>Fisrtname</th>
+                                    <th>lastname</th>
+                                    <th>Telephone</th>
+                                    <th>Wallet number</th>
+                                    <th>Airtime number</th>
+                                </tr>
+                            </thead>
+                            @for(applicant <- AgentApplication.appliedAgents() ) {
+                                <tr>
+                                    <td class="firstname">
+                                    @applicant.firstname
+                                    </td>
+                                    <td class="lastname">
+                                    @applicant.lastname
+                                    </td>
+                                    <td class="phonenumber">
+                                    @applicant.phonenumber
+                                    <td class="walletnumber"  >
+                                    @for(x : ApprovedAgents <- applicant.Approved_agentsList()){
+                                        <a href="">@x.walletnumber</a>
+                                    </td>
+                                    <td class="airtimenumber">
+                                        <a href="">@x.airtimenumber</a>
+                                        <a href="">@x.applicant.lastname</a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                            </table>
+                        </div>
+@*                    --- End search results --*@
 
 
+                          <div class="col-md-9 approvedusers"><br>
                             @if(message == "error") {
                                 <div class="alert alert-danger col-md-6 offset-1" role="alert">
                                 @flash.get("error")
@@ -30,7 +73,7 @@
 
                             <div class="col-sm-offset-1" id="tablediv">
 
-                            @if(AgentApplication.appliedAgents() == null ) {
+                        @if(AgentApplication.appliedAgents() != null && !AgentApplication.appliedAgents().isEmpty() ) {
 
                                 <table class="table   table-bordered table-hover table-striped ">
 
@@ -129,10 +172,7 @@
                             <p class="mt-5 ml-5">Sorry you have no approved/rejected application</p>
                         </div>
                         }
-
-
-
-</div>
+                      </div>
                         </div>
 
                     </div>

@@ -116,4 +116,13 @@ public class AgentApplication extends Model {
      return findApplication.where().ne("reject_status", "0").findList();
     }
 
+
+    // get applicants according to his phone number
+    public static List<AgentApplication> Searched(String data) {
+        return findApplication.where().ne("reject_status", "0").or(
+                com.avaje.ebean.Expr.like("walletnumber", data + "%"),
+                com.avaje.ebean.Expr.like("airtimenumber",  data + "%")
+        ).findList();
+    }
+
 }
