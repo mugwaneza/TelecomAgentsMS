@@ -39,7 +39,6 @@ public class Application extends Controller {
 
       // Display agent signin form
     public static  Result agentSingin(){
-        session().clear();
 
         // Find user session
         boolean Session =  session().get("agentlog") !=null;
@@ -284,7 +283,9 @@ public class Application extends Controller {
     public static Result SendChat(){
         DynamicForm signupForm = new DynamicForm().bindFromRequest();
         AgentsInquiry user = new AgentsInquiry();
+
         String agentid = session().get("agentlog");
+
         user.agent =ApprovedAgents.approved.where().eq("applicant_id",agentid).findUnique();
         user.message =signupForm.field("message").value();
         user.save();

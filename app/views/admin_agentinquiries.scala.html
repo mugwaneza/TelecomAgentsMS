@@ -19,7 +19,7 @@
 
 
                                     <ul class="list-group  list-group-horizontal-sm">
-
+                                        @if(AgentsInquiry.FindChatSender !=null && !AgentsInquiry.FindChatSender.isEmpty()){
                                         @for(AgentsInquiries <- AgentsInquiry.FindChatSender){
                                          <a href="@routes.AdminDashboard.ChatDetails(id)@AgentsInquiries.agent.applicant.id" class="mylink" >
                                                   <input type="hidden" value="@AgentsInquiries.agent.applicant.id" id="link">
@@ -29,6 +29,9 @@
 
                                             </li>
                                          </a>
+                                        }
+                                        }else{
+                                            <p>No chat available</p>
                                         }
                                     </ul>
                                 </div>

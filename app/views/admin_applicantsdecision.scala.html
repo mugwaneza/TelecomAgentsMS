@@ -1,4 +1,4 @@
-@(message: String)
+@(message: String, searched: List[ApprovedAgents])
 @main_dashboard("TAMS" ) {
 
     @views.html.navigation("message")
@@ -12,12 +12,13 @@
 
                         <div class="col-md-6">
                         <div class="form-group offset-3">
-                            <input type="text" class="form-control search" id="search" placeholder="search for an agent"  >
+                            <input type="text" class="form-control search" id="search" placeholder="search for an agent" required  >
                         </div>
                         </div>
 
+                        @if(searched !=null && !searched.isEmpty){
 @*                         Section for results of search*@
-                        <div class="searched col-md-9">
+                        <div class=" col-md-9" id="searched" >
                             <table class="table   table-bordered table-hover table-striped ">
                             <thead>
                                 <tr class="bg-warning text-white">
@@ -28,33 +29,34 @@
                                     <th>Airtime number</th>
                                 </tr>
                             </thead>
-                            @for(applicant <- AgentApplication.appliedAgents() ) {
+                            @for(user  <- searched) {
                                 <tr>
                                     <td class="firstname">
-                                    @applicant.firstname
+                                    @user.applicant.firstname
                                     </td>
                                     <td class="lastname">
-                                    @applicant.lastname
+                                    @user.applicant.lastname
                                     </td>
                                     <td class="phonenumber">
-                                    @applicant.phonenumber
+                                    @user.applicant.phonenumber
                                     <td class="walletnumber"  >
-                                    @for(x : ApprovedAgents <- applicant.Approved_agentsList()){
-                                        <a href="">@x.walletnumber</a>
+@*//                                    @for(x  <- AgentApplication.Approved_agentsList()){*@
+                                        <a href="">@user.walletnumber</a>
                                     </td>
                                     <td class="airtimenumber">
-                                        <a href="">@x.airtimenumber</a>
-                                        <a href="">@x.applicant.lastname</a>
-                                        }
+                                        <a href="">@user.airtimenumber</a>
+
                                     </td>
+@*//                                    }*@
                                 </tr>
                             }
                             </table>
                         </div>
+                        }
 @*                    --- End search results --*@
 
 
-                          <div class="col-md-9 approvedusers"><br>
+                          <div class="col-md-9" id="approvedusers"><br>
                             @if(message == "error") {
                                 <div class="alert alert-danger col-md-6 offset-1" role="alert">
                                 @flash.get("error")

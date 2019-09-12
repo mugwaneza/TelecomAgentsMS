@@ -3,12 +3,14 @@ package controllers;
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlUpdate;
 import models.AgentApplication;
+import models.ApprovedAgents;
 import org.mindrot.jbcrypt.BCrypt;
 import play.data.DynamicForm;
 import play.db.ebean.Model;
 import play.mvc.Controller;
 import play.mvc.Result;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,11 +27,17 @@ public class ReportingControl extends Controller {
 
         return ok(views.html.admin_agentsapproval.render(""));
     }
+    public static List<ApprovedAgents> searched ;
+    public static Result ApplicationDecisonSearch(String mobile){
+
+         searched = AgentApplication.Searched(mobile);
+
+        return ok(views.html.admin_applicantsdecision.render("", searched));
+    }
 
     public static Result ApplicationDecison(){
-
-
-        return ok(views.html.admin_applicantsdecision.render(""));
+         List<ApprovedAgents> empty = null;
+        return ok(views.html.admin_applicantsdecision.render("" ,empty));
     }
 
 

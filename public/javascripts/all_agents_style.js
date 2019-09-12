@@ -173,6 +173,33 @@ $(".deletebtn").click(function() {
         }
 
 
+            $(document).ready(function() {
+                $('#searched').hide();
+                $('#searched').show();
+            });
+
+
+       // when searchbox key pressed
+
+        var textbox = document.getElementById("search");
+        textbox.addEventListener("keypress", function onEvent(event) {
+        if (event.key === "Enter") {
+
+            var mobile = document.getElementById("search").value;
+            // show hidden table
+            // hide the table of approved
+
+            window.location.href = "/manage/search/"+mobile;
+
+        }
+            $('#searched').show();
+            document.getElementById('approvedusers').style.display = 'none';
+
+        });
+
+
+
+
 
 
 

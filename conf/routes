@@ -55,7 +55,8 @@ POST /agent/inquiry/reply                controllers.AdminDashboard.ReplyChat()
 GET /manage/agents                 controllers.ReportingControl.ListAppicants()
 POST /manage/approve                controllers.AdminDashboard.ApproveAgent()
 POST /manage/reject                controllers.AdminDashboard.RejectApplicant()
-GET /manage/decision                controllers.ReportingControl.ApplicationDecison()
+GET /manage/search/:mobile        controllers.ReportingControl.ApplicationDecisonSearch(mobile :String)
+GET /manage/decision                 controllers.ReportingControl.ApplicationDecison()
 
 #// modification of admin accounts
 GET /admin/modify/account                controllers.ReportingControl.ShowAdmins()
@@ -65,6 +66,8 @@ POST /admin/modify/account                controllers.ReportingControl.UpdateAdm
 #get the lists using json and js
 GET /agent/sectors/:id                controllers.Application.GetSectors(id :Long)
 GET /agent/cells/:id                controllers.Application.GetCells(id :Long)
+
+
 
 
 

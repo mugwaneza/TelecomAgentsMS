@@ -1,4 +1,4 @@
-@(message: String)(agentchat : List[AgentsInquiry])
+@(message: String)(inquiry : List[AgentsInquiry])
 @main_dashboard("approved" ) {
     @views.html.navigation("approval")
 
@@ -16,8 +16,8 @@
                                 <div class="chats mt-5 col-md-10" >
 
                                     <ul class="list-group  list-group-horizontal-sm">
-
-                                @for(InqueryMessage <- agentchat) {
+                                @if( (inquiry != null) && (!inquiry.isEmpty) ){
+                                @for(InqueryMessage <- inquiry) {
                                     @if((Long.parseLong(session().get("agentlog")) ) == (InqueryMessage.agent.id)){
                                     <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action list-group-item-warning">
                                         <h5>You: </h5>   @InqueryMessage.message <span>&nbsp;</span> <br> @InqueryMessage.created_at
@@ -25,9 +25,13 @@
                                    }
                                     @if( ((Long.parseLong(session().get("agentlog"))) == (InqueryMessage.agent.id) ) && (InqueryMessage.reply_status==true) ){
                                     <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action list-group-item-success">
-                                       <h5>System feedback: </h5> @InqueryMessage.reply <span>&nbsp;</span> <br> @InqueryMessage.replied_at
+                                       <h5>Feedback: </h5> @InqueryMessage.reply <span>&nbsp;</span> <br> @InqueryMessage.replied_at
                                     </li>
                                     }
+                                }
+                               }else{
+
+                              <p>No chat available</p>
                                 }
 
                                     </ul>
