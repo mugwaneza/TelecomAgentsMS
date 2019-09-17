@@ -241,7 +241,6 @@ public class AdminDashboard extends Controller {
         agent.save();
 
         // Afteer approve Agent Update reject status in applicant table
-
         SqlUpdate update = Ebean. createSqlUpdate("UPDATE applicant SET reject_status=:reject_status WHERE id=:id")
                 .setParameter("reject_status", "approved")
                 .setParameter("id", applicantid);
@@ -252,26 +251,22 @@ public class AdminDashboard extends Controller {
      // Reject applicant
 
     public static Result RejectApplicant(){
-
         myform  = form().bindFromRequest();
         String applicantid = myform.field("rejectid").value();
-
         SqlUpdate update = Ebean. createSqlUpdate("UPDATE applicant SET reject_status=:reject_status WHERE id=:id")
                 .setParameter("reject_status", "rejected")
                 .setParameter("id", applicantid);
         int rows = update.execute();
-
         return redirect(routes.ReportingControl.ListAppicants());
-    }
-
+     }
 
     public static Result Inquiries(){
-
         return ok(admin_agentinquiries.render("", "" ));
+
     }
+
     public static Result ChatDetails(String id){
         List<AgentsInquiry> inquiry = AgentsInquiry.agentChat(id);
-
         String ur = request().uri();
         System.out.println(ur);
         return ok(admin_chatposts.render("", inquiry));

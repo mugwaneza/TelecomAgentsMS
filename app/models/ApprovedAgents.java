@@ -1,5 +1,7 @@
 package models;
 
+import com.avaje.ebean.Ebean;
+import com.avaje.ebean.SqlQuery;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
@@ -43,10 +45,14 @@ public class ApprovedAgents extends Model {
     public static Finder<Long,ApprovedAgents> approved = new Finder<>(Long.class,ApprovedAgents.class);
 
     public  static  List<ApprovedAgents> approved(){
-
         return approved.where().eq("status", 1).findList();
     }
 
+
+    // summary list of inquiry sender in admin
+    public static  List<AgentsInquiry> FindChatSender(){
+        return  AgentsInquiry.InquiryFinder.orderBy("id desc").setDistinct(true).findPagingList(2).getAsList();
+    }
 
 
 }

@@ -1,6 +1,7 @@
 package models;
 
 
+import com.avaje.ebean.Ebean;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
@@ -18,7 +19,7 @@ public class AgentsInquiry  extends Model {
     public Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    public ApprovedAgents agent ;
+    public ApprovedAgents approved ;
 
     @ManyToOne(cascade = CascadeType.ALL)
     public AdminAccount admin ;
@@ -41,6 +42,8 @@ public class AgentsInquiry  extends Model {
 
     public Timestamp created_at = new Timestamp(new Date().getTime());
 
+
+
     public static Model.Finder<Long,AgentsInquiry> InquiryFinder = new  Model.Finder<>(Long.class,AgentsInquiry.class);
 
 
@@ -48,24 +51,26 @@ public class AgentsInquiry  extends Model {
     public static List<AgentsInquiry> FindAgentChat(String agentid)
     {
         List<AgentsInquiry> agentinq;
-        agentinq = AgentsInquiry.InquiryFinder.where().eq("agent_id",agentid).orderBy("id desc").findList();
+        agentinq = AgentsInquiry.InquiryFinder.where().eq("approved_id",agentid).orderBy("id desc").findList();
 
         return agentinq;
     }
 
-      // summary list of inquiry sender in admin
-    public static List<AgentsInquiry> FindChatSender(){
-        List<AgentsInquiry> sender;
-        sender = InquiryFinder.orderBy("id desc").findList();
-        return sender;
-    }
 
     // Detail chat of each message sender in admin
     public static List<AgentsInquiry> agentChat(String id)
     {
         List<AgentsInquiry> agentc ;
-        agentc = InquiryFinder.where().eq("agent_id", id).findList();
+        agentc = InquiryFinder.where().eq("approved_id", id).findList();
         return  agentc;
+    }
+
+    public  static int Unread(){
+//        int count =
+//                Ebean.find(AgentsInquiry.class)
+//                        .fetch("id")
+//                        .where("reply_status IS false").findRowCount();
+        return  InquiryFinder.where().eq("reply_status",false).findRowCount();
     }
 
 

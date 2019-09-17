@@ -286,7 +286,7 @@ public class Application extends Controller {
 
         String agentid = session().get("agentlog");
 
-        user.agent =ApprovedAgents.approved.where().eq("applicant_id",agentid).findUnique();
+        user.approved =ApprovedAgents.approved.where().eq("applicant_id",agentid).findUnique();
         user.message =signupForm.field("message").value();
         user.save();
         flash("success"," Your message was sent, thanks " );

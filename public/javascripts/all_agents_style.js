@@ -113,6 +113,12 @@ $(".deletebtn").click(function() {
          localStorage.setItem("chatid",data )
      });
 
+     $('.usermess').click(function () {
+         var data = $('#angentchat').val();
+         $("#replyid").val(data);
+         alert(data);
+     });
+
 
      $(".btnsub").click(function () {
        var chatid = localStorage.getItem("chatid")

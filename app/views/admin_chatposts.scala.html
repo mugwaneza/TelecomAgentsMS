@@ -19,16 +19,17 @@
 
                                            @if( !inquiry.isEmpty && inquiry != null){
                                            @for(inquiry <- inquiry){
-                                            <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action list-group-item-info">
-                                                <h5>@inquiry.agent.applicant.agent.fullname: </h5> @inquiry.message <span>&nbsp;</span> <br> @inquiry.created_at
+                                            <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action list-group-item-info usermess"  id="usermess">
+                                                <h5>@inquiry.approved.applicant.agent.fullname: </h5> @inquiry.message <span>&nbsp;</span> <br> @inquiry.created_at
+                                                <input id="angentchat" name="angentchat" type="text" value="@inquiry.id">
                                             </li>
 
 
-                                        @if( inquiry.reply_status==true){
-                                          <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action list-group-item-primary">
+                                     @if( inquiry.reply_status==true){
+                                          <li class="list-group-item d-flex justify-content-between align-items-center ml-5 list-group-item-action list-group-item-primary" style="border-bottom-left-radius: 20px; border-top-right-radius: 20px;">
                                                 <h5>You: </h5> @inquiry.reply <span>&nbsp;</span> <br> @inquiry.replied_at
                                            </li>
-                                           }
+                                          }
                                            }
                                            }else{
                                            <p>No inquiry available</p>
@@ -50,11 +51,12 @@
                                             </div>
                                         }
 
-                                        <div class="form-group row offset-1 mt-5">
+                                        <div class="form-group row offset-1 mt-5 replydiv" >
 
                                             <input type="hidden" name="chatid" class="chatid"  id="chatid">
 
                                             <div class="col-sm-10">
+                                                <input type="text" name="replyid" id="replyid" >
                                                 <input
                                                 name="message"
                                                 id="message"

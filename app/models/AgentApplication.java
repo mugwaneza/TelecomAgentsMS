@@ -98,7 +98,7 @@ public class AgentApplication extends Model {
     }
 
     // the list of non approved from approved agents
-    public List<ApprovedAgents> Approved_agentsList(){
+    public  List<ApprovedAgents> Approved_agentsList(){
         return ApprovedAgents.approved.where().eq("applicant.id",id).eq("status",true).findList();
     }
 
