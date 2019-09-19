@@ -57,6 +57,7 @@ POST /manage/approve                controllers.AdminDashboard.ApproveAgent()
 POST /manage/reject                controllers.AdminDashboard.RejectApplicant()
 GET /manage/search/:mobile        controllers.ReportingControl.ApplicationDecisonSearch(mobile :String)
 GET /manage/decision                 controllers.ReportingControl.ApplicationDecison()
+POST /manage/decision/update                 controllers.ReportingControl.UpdateAgent()
 
 #// modification of admin accounts
 GET /admin/modify/account                controllers.ReportingControl.ShowAdmins()

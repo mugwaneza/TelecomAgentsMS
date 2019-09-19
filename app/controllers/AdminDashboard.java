@@ -276,8 +276,10 @@ public class AdminDashboard extends Controller {
     public static Result ReplyChat(){
         DynamicForm signupForm = new DynamicForm().bindFromRequest();
         String adminid = session().get("adminlog");
+        System.out.println(adminid);
+
         String reply =signupForm.field("message").value();
-        String chatid =signupForm.field("chatid").value();
+        String chatid =signupForm.field("replyid").value();
 
         Timestamp replytime = new Timestamp(new Date().getTime());
         SqlUpdate update = Ebean. createSqlUpdate("update inquiry set admin_id=:admin_id, reply=:reply, reply_status=:reply_status,replied_at=:replied_at  WHERE id=:id")

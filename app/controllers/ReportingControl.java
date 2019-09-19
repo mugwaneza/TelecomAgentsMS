@@ -40,6 +40,31 @@ public class ReportingControl extends Controller {
         return ok(views.html.admin_applicantsdecision.render("" ,empty));
     }
 
+    public static Result UpdateAgent(){
+        myform  = form().bindFromRequest();
+        String adminid = myform.field("id2").value();
+//        String walletno = myform.field("walletnumber2").value();
+//        String airtimeno = myform.field("airtimenumber2").value();
+        String firstname = myform.field("firstname2").value();
+        String lastname = myform.field("lastname2").value();
+        String phoneno = myform.field("phonenumber2").value();
+        String company = myform.field("company2").value();
+        String site = myform.field("sitename2").value();
+        String address = myform.field("address2").value();
+
+        SqlUpdate update = Ebean. createSqlUpdate("UPDATE applicant SET firstname=:firstname, lastname=:lastname, phonenumber=:phonenumber, company=:company, sitename=:sitename, address=:address WHERE id=:id")
+                .setParameter("firstname", firstname)
+                .setParameter("lastname", lastname)
+                .setParameter("phonenumber", phoneno)
+                .setParameter("company", company)
+                .setParameter("sitename", site)
+                .setParameter("address", address)
+                .setParameter("id", adminid);
+         int rows = update.execute();
+
+        return redirect("/manage/decision");
+    }
+
 
     public static Result ShowAdmins(){
         return ok(views.html.admin_manamentofaccounts.render(""));

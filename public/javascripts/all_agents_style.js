@@ -47,6 +47,40 @@ $(".detail").click(function() {
      document.getElementById("passportphoto").setAttribute("src", "../assets/"+path );
 });
 
+// show student details for update
+$(".modify").click(function() {
+    var $row = $(this).closest("tr");    // Find the row
+    var $rowId = $row.find(".id").text(); // Find the text
+
+    var $firstname = $row.find(".firstname").text(); // Find the text
+    var $lastname = $row.find(".lastname").text(); // Find the text
+    var $phonenumber = $row.find(".phonenumber").text(); // Find the text
+    var $phone = $row.find(".phonenumber").text(); // Find the text
+    var $address = $row.find(".address").text(); // Find the text
+    var $company = $row.find(".company").text(); // Find the text
+    var $sitename = $row.find(".sitename").text(); // Find the text
+    // var $airtimeno = $row.find(".airtimenumber").text(); // Find the text
+    // var $wallet = $row.find(".walletnumber").text(); // Find the text
+
+    // Append variables to the model dialog
+    $("#phonenumber2").val($.trim($phone));
+    $("#firstname2").val($.trim( $firstname));
+    $("#lastname2").val($.trim($lastname));
+    $("#address2").val($.trim($address));
+    // $("#company2").append($('<option></option>').val($company).html($company));
+    $("#sitename2").val($.trim($sitename));
+    // $("#walletno2").val($.trim($wallet));
+    // $("#airtimeno2").val($.trim($airtimeno));
+
+
+    $("#id2").val($.trim($rowId));
+
+
+
+
+   });
+
+
   // When accept button is clicked
 $(".accept").click(function() {
 
@@ -55,7 +89,6 @@ $(".accept").click(function() {
     var $row = $(this).closest("tr");    // Find the row
     var $rowId = $row.find(".id").text(); // Find the text
     var userid = $("#userid").val($.trim($rowId));
-
     // var data = $("#approvalform").serialize();
 
 });
@@ -114,9 +147,12 @@ $(".deletebtn").click(function() {
      });
 
      $('.usermess').click(function () {
-         var data = $('#angentchat').val();
-         $("#replyid").val(data);
-         alert(data);
+         // get id of clicked list item
+         var userchatId = $(this).attr('id').replace('usermess', 'angentchat');
+         var Id = $('#'+userchatId).val();
+         $("#replyid").val(Id);
+
+         $("#replydiv").show();
      });
 
 

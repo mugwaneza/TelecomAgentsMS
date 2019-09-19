@@ -2,6 +2,7 @@ package models;
 
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlQuery;
+import com.avaje.ebean.SqlRow;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
@@ -51,8 +52,11 @@ public class ApprovedAgents extends Model {
 
     // summary list of inquiry sender in admin
     public static  List<AgentsInquiry> FindChatSender(){
-        return  AgentsInquiry.InquiryFinder.orderBy("id desc").setDistinct(true).findPagingList(2).getAsList();
+//        List<AgentsInquiry> rows =Ebean.createSqlQuery("SELECT IFNULL(COUNT(distinct t.approved_id),0) as count FROM inquiry t WHERE  t.reply_status=:t.reply_status ").setParameter("reply_status", false).findList();
+
+        return  AgentsInquiry.InquiryFinder.where("approved_id IS NOT NULL GROUP BY approved_id order by id desc ").findList();
     }
+
 
 
 }

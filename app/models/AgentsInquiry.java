@@ -2,10 +2,12 @@ package models;
 
 
 import com.avaje.ebean.Ebean;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -66,13 +68,18 @@ public class AgentsInquiry  extends Model {
     }
 
     public  static int Unread(){
-//        int count =
-//                Ebean.find(AgentsInquiry.class)
-//                        .fetch("id")
-//                        .where("reply_status IS false").findRowCount();
-        return  InquiryFinder.where().eq("reply_status",false).findRowCount();
-    }
 
+        try {
+
+         return  InquiryFinder.where("approved_id IS NOT NULL AND reply_status=false GROUP BY approved_id ").findRowCount();
+
+        }
+        catch (Exception  e) {
+          System.out.println(e);
+            }
+
+      return 0;
+    }
 
 
 

@@ -88,7 +88,8 @@
                                             <th>Station</th>
                                             <th>Telephone</th>
                                             <th>Address</th>
-                                            <th>View</th>
+                                            <th>Update</th>
+                                            <th>Detail</th>
                                             <th >status</th>
                                         </tr>
                                     </thead>
@@ -156,7 +157,11 @@
                                             </td>
 
                                             <td>
-                                                <button type="button" class="btn btn-primary btn-sm detail" data-toggle="modal" data-target="#detail">Detail</button>
+                                                <button type="button" class="btn btn-warning btn-sm modify" data-toggle="modal" data-target="#modify">Update</button>
+                                            </td>
+
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm detail" data-toggle="modal" data-target="#detail">Detail</button>
                                             </td>
 
                                             <td >
@@ -363,6 +368,124 @@
                                         </div>
                                     </div>
 
+                                </form>
+
+                            </div>
+                            <div class="modal-footer">
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+    @*User Mofify *@
+    @*    ============================-->*@
+
+    <section id="">
+        <div class="container">
+            <div class="row">
+                <div class="modal fade" id="modify" tabindex="-1" role="dialog" aria-labelledby="modify" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title center" id="">MODIFY AGENT INFORMATION</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body ">
+
+                <form class=" mt-5"  method="post" id="" action="/manage/decision/update" enctype="multipart/form-data"  >
+              <input type="text" id="id2" placeholder="iduser" name="id2" hidden>
+     @*       <div class="row">
+                <div class=" col-md-6">
+                    <div class="form-group   ">
+                        <input  name="walletnumber2" value="" placeholder="Wallet number" class="form-control text-warning" id="walletno2"  type="text">
+                    </div>
+                </div>
+
+                <div class="col-md-6 ">
+                    <div class="form-group   ">
+                        <input  name="airtimenumber2" value="" placeholder="Airtime number" class="form-control text-warning" id="airtimeno2"  type="text">
+                    </div>
+                </div>
+            </div>*@
+
+
+        <div class="row">
+            <div class="form-group col-md-6  ">
+                <input
+                name="firstname2"
+                id="firstname2"
+                class="form-control"
+                type="text"
+                placeholder="Enter first name">
+            </div>
+
+            <div class="form-group col-md-6  ">
+                <input
+                name="lastname2"
+                id="lastname2"
+                class="form-control"
+                value=""
+                type="text"
+                placeholder="Enter last name">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-lg-12  ">
+                <input
+                name="phonenumber2"
+                class="form-control"
+                type="text"
+                id="phonenumber2"
+                placeholder="Enter phone number">
+            </div>
+
+            <div class="form-group col-md-12  ">
+                <input
+                name="address2"
+                value=""
+                class="form-control"
+                type="text"
+                id="address2"
+                placeholder="Enter your address">
+            </div>
+
+        </div>
+
+        <div class="row">
+
+                <div class="col-sm-6">
+                    <select  name="company2" id="company2" class="form-control">
+                        <option value=""> -- select your Telecom company -- </option>
+                        <option value="mtn"> MTN </option>
+                        <option value="airteltigo"> AIRTEL - TIGO </option>
+                    </select>
+
+                </div>
+
+               <div class="form-group col-md-6  ">
+                <input
+                name="sitename2"
+                value=""
+                id="sitename2"
+                class="form-control"
+                type="text"
+                placeholder="Enter site name">
+            </div>
+             </div>
+                    <div class="form-group col-md-12 ">
+                        <button class="form-control btn btn-warning btn-lg " type="submit">UPDATE</button>
+                    </div>
+
 
 
                                 </form>
@@ -381,8 +504,6 @@
             </div>
         </div>
     </section>
-
-
 
 
     <script type="text/javascript"

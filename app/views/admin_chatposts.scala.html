@@ -19,9 +19,9 @@
 
                                            @if( !inquiry.isEmpty && inquiry != null){
                                            @for(inquiry <- inquiry){
-                                            <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action list-group-item-info usermess"  id="usermess">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action list-group-item-info usermess"  id="usermess@inquiry.id">
                                                 <h5>@inquiry.approved.applicant.agent.fullname: </h5> @inquiry.message <span>&nbsp;</span> <br> @inquiry.created_at
-                                                <input id="angentchat" name="angentchat" type="text" value="@inquiry.id">
+                                                <input id="angentchat@inquiry.id" hidden name="angentchat" type="text" value="@inquiry.id">
                                             </li>
 
 
@@ -51,12 +51,10 @@
                                             </div>
                                         }
 
-                                        <div class="form-group row offset-1 mt-5 replydiv" >
+                                        <div class="form-group row offset-1 mt-5 replydiv" style="display: none" id="replydiv" >
 
-                                            <input type="hidden" name="chatid" class="chatid"  id="chatid">
-
+                                            <input hidden type="text" name="replyid" id="replyid" >
                                             <div class="col-sm-10">
-                                                <input type="text" name="replyid" id="replyid" >
                                                 <input
                                                 name="message"
                                                 id="message"
@@ -65,7 +63,6 @@
                                                 placeholder="Enter Message description"/>
                                             </div>
                                             <input type="submit" class="btn btn-success btnsub" value="Reply">
-
                                         </div>
 
                                     </form>
