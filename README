@@ -2,3 +2,21 @@ This is your new Play application
 =====================================
 
 This file will be packaged with your application, when using `play dist`.
+
+
+How to access new admin dashboard for creating an itial account that will be used to add settings in the system
+like register Province sector district and cell before users start using the system is through the following link:
+
+http://localhost:9000/dashboard
+
+then after unfold manage -> admin accounts  -> when you are done remember to signout and go to home page where it is written
+private area and login as admin then proceed with farther activities.
+
+
+
+thanks:
+
+For any appreciation or inquiry
+email: mugwales@gmail.com
+
+
