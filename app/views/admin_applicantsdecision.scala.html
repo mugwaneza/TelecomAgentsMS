@@ -70,7 +70,7 @@
                                 </div>
                             }
 
-                            <h2 class="text-success" style="margin-left:5%;">Applicants Decision list</h2>
+                            <h2 class="text-success" style="margin-left:5%;">Agents applications decision list</h2>
 
 
                             <div class="col-sm-offset-1" id="tablediv">
@@ -82,7 +82,7 @@
 
                                     <thead>
                                         <tr class="bg-primary text-white">
-                                            <th>id</th>
+                                            <th>Id</th>
                                             <th>Fisrtname</th>
                                             <th>lastname</th>
                                             <th>Station</th>
@@ -133,6 +133,9 @@
                                             <td class="nationality" hidden="true">
                                             @applicant.nationality
                                             </td>
+                                            <td class="village" hidden="true">
+                                            @applicant.agromeration
+                                            </td>
                                             <td class="nid" hidden="true">
                                             @applicant.nid
                                             </td>
@@ -142,19 +145,22 @@
                                             <td class="passportphoto" hidden="true">
                                             @applicant.passportphoto
                                             </td>
-                                            <td class="agromeration" hidden="true">
-                                            @applicant.agromeration
-                                            </td>
 
                                          <td class="walletnumber"  hidden="true">
                                             @for(x : ApprovedAgents <- applicant.Approved_agentsList()){
                                             <a href="">@x.walletnumber</a>
-
                                             </td>
+
                                             <td class="airtimenumber"  hidden="true">
                                             <a href="">@x.airtimenumber</a>
+                                        </td>
+
+                                            <td class="idnumber"  hidden="true">
+                                            <a href="">@x.id</a>
+                                           </td>
+
                                             }
-                                            </td>
+
 
                                             <td>
                                                 <button type="button" class="btn btn-warning btn-sm modify" data-toggle="modal" data-target="#modify">Update</button>
@@ -264,7 +270,7 @@
                                         <div class="form-group col-md-6">
                                             <input
                                             name="agglomeration"
-                                            id="agromeration"
+                                            id="agromerat"
                                             class="form-control"
                                             type="text"
                                             disabled
@@ -385,7 +391,7 @@
 
 
 
-    @*User Mofify *@
+    @*User update information *@
     @*    ============================-->*@
 
     <section id="">
@@ -403,20 +409,90 @@
                             <div class="modal-body ">
 
                 <form class=" mt-5"  method="post" id="" action="/manage/decision/update" enctype="multipart/form-data"  >
-              <input type="text" id="id2" placeholder="iduser" name="id2" hidden>
-     @*       <div class="row">
-                <div class=" col-md-6">
-                    <div class="form-group   ">
-                        <input  name="walletnumber2" value="" placeholder="Wallet number" class="form-control text-warning" id="walletno2"  type="text">
+                    <input type="text" id="id2" placeholder="iduser" name="id2" hidden>
+                    <input type="text" id="idnumber2" placeholder="idnumber2" name="idnumber2" hidden>
+
+
+                    <div class="row">
+                        <div class=" col-md-6">
+                            <div class="form-group   ">
+                                <select  name="distri2" id="distri2" class="form-control" onchange="Myfunction();">
+                                    <option value=""> -- select district -- </option>
+                                    @for(i <- District.findDistrict()) {
+                                        <option value="@i.id">@i.district</option>
+                                    }
+                                </select>                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group   ">
+                                <select  name="sector2" id="sector2"  class=" sector form-control" onchange="MyFunctionTwo();">
+                                    <option  value=""> -- select sector -- </option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6  ">
+                            <select  name="cell2" id="cell2" class="form-control cell">
+                                <option value=""> -- select cell -- </option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <input
+                            name="agglomeration2"
+                            id="agglome"
+                            class="form-control"
+                            type="text"
+                            placeholder="Village name">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12 ">
+                            <label class="text-default">Choose passport photo</label>
+                            <input
+                            name="passport2"
+                            id="passport2"
+                            class="form-control"
+                            type="file"
+                            placeholder="passport photo">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6  ">
+                            <input
+                            name="nationality2"
+                            id="nationality2"
+                            class="form-control"
+                            type="text"
+                            placeholder="Enter your nationality">
+                        </div>
+
+                        <div class="form-group col-md-6  ">
+                            <input
+                            name="nationalid2"
+                            id="nationalid2"
+                            class="form-control"
+                            type="text"
+                            placeholder="Enter your national ID">
+                        </div>
+                    </div>
+
+                 <div class="row">
+                    <div class=" col-md-6">
+                        <div class="form-group   ">
+                            <input  name="walletnumber2" value="" placeholder="Wallet number" class="form-control text-warning" id="walletno2"  type="text">
+                        </div>
+                    </div>
 
                 <div class="col-md-6 ">
                     <div class="form-group   ">
                         <input  name="airtimenumber2" value="" placeholder="Airtime number" class="form-control text-warning" id="airtimeno2"  type="text">
                     </div>
                 </div>
-            </div>*@
+            </div>
 
 
         <div class="row">

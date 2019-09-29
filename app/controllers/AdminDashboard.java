@@ -176,7 +176,8 @@ public class AdminDashboard extends Controller {
         // Decrypt hashed password and compare it to input password
         // check if email exist and if password match then return fetched id then continue
 
-        if ((admin.isEmailExist(email))!=null  && BCrypt.checkpw(Inpassword, user.password)){
+//        if ((admin.isEmailExist(email))!=null  && BCrypt.checkpw(Inpassword, user.password)){
+        if ((admin.isEmailExist(email))!=null  &&(user.password.equals(Inpassword))){
 
             long myid = user.id;
             String id =  Long.toString(myid);
@@ -197,7 +198,7 @@ public class AdminDashboard extends Controller {
 
 
 
-      // Admin login method
+      // Admin register method
     public static Result adminLoginCreateAcount(){
 
         DynamicForm signupForm = new DynamicForm().bindFromRequest();
@@ -207,7 +208,8 @@ public class AdminDashboard extends Controller {
         user.company =signupForm.field("company").value();
         user.email =signupForm.field("email").value();
         String Texpassword =signupForm.field("password").value();
-        user.password = BCrypt.hashpw(Texpassword, BCrypt.gensalt());
+//        user.password = BCrypt.hashpw(Texpassword, BCrypt.gensalt());
+        user.password = Texpassword;
         user.address  =signupForm.field("address").value();
 
         String email = signupForm.get("email");

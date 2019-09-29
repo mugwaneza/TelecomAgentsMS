@@ -73,7 +73,8 @@ public class Application extends Controller {
         user.gender =signupForm.field("gender").value();
         user.email =signupForm.field("email").value();
         String Texpassword =signupForm.field("password").value();
-        user.password = BCrypt.hashpw(Texpassword, BCrypt.gensalt());
+//        user.password = BCrypt.hashpw(Texpassword, BCrypt.gensalt());
+          user.password = Texpassword;
 
         String email = signupForm.get("email");
         if ((user.isEmailExist(email) ) == null){
@@ -106,8 +107,11 @@ public class Application extends Controller {
 
         // Decrypt hashed password and compare it to input password
         // check if email exist and if password match then return fetched id then continue
-           if ((agentaccount.isEmailExist(email))!=null  && BCrypt.checkpw(Inpassword, user.password)){
-               long myid = user.id;
+//           if ((agentaccount.isEmailExist(email))!=null  && BCrypt.checkpw(Inpassword, user.password)){
+           if ((agentaccount.isEmailExist(email))!=null  && ( user.password.equals(Inpassword)) ){
+
+
+            long myid = user.id;
                String id =  Long.toString(myid);
 
                // Clear existing session

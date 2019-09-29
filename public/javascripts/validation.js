@@ -180,8 +180,8 @@ $('#applicationForm').validate({
         nationalid : {
             required : true,
             number:true,
-            minlength:18,
-            maxlength:18
+            minlength:16,
+            maxlength:16
         },
         company : {
             required : true,
