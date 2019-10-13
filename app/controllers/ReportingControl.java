@@ -63,11 +63,12 @@ public class ReportingControl extends Controller {
         // get file name from uploaded
         String fileName = uploadedFile.getFilename();
         File SourceUploadedfile = uploadedFile.getFile();
+
         //Rename a file
         String photoname = (new Date()).getTime() +"_"+ fileName;
         File DestinationFilespath = new File("public/uploads/"+ photoname);
-        String passport2 = new File("/uploads/"+ photoname).getPath();
 
+        String passport2 = new File("/uploads/"+ photoname).getPath();
         String nationality = myform.field("nationality2").value();
         String nid = myform.field("nationalid2").value();
 
@@ -95,7 +96,9 @@ public class ReportingControl extends Controller {
                 .setParameter("id", adminid);
          int rows = update.execute();
          if (rows > 0){
-         SqlUpdate update2 = Ebean. createSqlUpdate("UPDATE approved_agents SET walletnumber=:walletnumber, airtimenumber=:airtimenumber WHERE id=:id")
+             SourceUploadedfile.renameTo(DestinationFilespath); //here you are moving photo to path directory
+
+             SqlUpdate update2 = Ebean. createSqlUpdate("UPDATE approved_agents SET walletnumber=:walletnumber, airtimenumber=:airtimenumber WHERE id=:id")
                  .setParameter("walletnumber", walletno)
                  .setParameter("airtimenumber", airtimeno)
                  .setParameter("id", idnumber);
