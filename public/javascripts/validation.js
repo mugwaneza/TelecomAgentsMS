@@ -168,7 +168,8 @@ $('#applicationForm').validate({
         phone : {
             required : true,
             number:true,
-            minlength:10
+            minlength:10,
+            maxlength:10
         },
 
         nationality : {
@@ -205,6 +206,71 @@ $('#agentchat').validate({
         message : {
             required : true,
         }
+
+    }
+});
+
+
+
+// update decision of user - validation
+$('#myupdate').validate({
+    rules : {
+        distri2 : {
+            required : true,
+        },
+        sector2 : {
+            required : true
+        } ,
+        cell2 : {
+            required : true,
+        },
+        agglomeration2 : {
+            required : true,
+                 } ,
+        passport2 : {
+            required : true,
+                 }  ,
+        nationality2 : {
+            required : true,
+                 }
+        ,
+        nationalid2 : {
+            required : true,
+            minlength :16,
+            maxlength:16
+        }
+        ,
+        walletnumber2 : {
+
+            required : true,
+            minlength :10,
+            maxlength:10
+        }
+         ,
+        airtimenumber2 : {
+            required : true,
+            minlength :10,
+            maxlength:10
+        } ,
+    firstname2 : {
+            required : true,
+        },
+        phonenumber2 : {
+            required : true,
+            minlength :10,
+            maxlength:10
+        },
+        address2 : {
+            required : true,
+        },
+        company2 : {
+            required : true,
+        },
+        sitename2 : {
+            required : true,
+        }
+
+
 
     }
 });

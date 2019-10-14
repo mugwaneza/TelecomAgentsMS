@@ -20,7 +20,7 @@
                                            @if( !inquiry.isEmpty && inquiry != null){
                                            @for(inquiry <- inquiry){
                                             <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action list-group-item-info usermess"  id="usermess@inquiry.id">
-                                                <h5>@inquiry.approved.applicant.agent.fullname: </h5> @inquiry.message <span>&nbsp;</span> <br> @inquiry.created_at
+                                                <h5>@inquiry.agents.fullname: </h5> @inquiry.message <span>&nbsp;</span> <br> @inquiry.created_at
                                                 <input id="angentchat@inquiry.id" hidden name="angentchat" type="text" value="@inquiry.id">
                                             </li>
 

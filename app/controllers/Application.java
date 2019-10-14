@@ -289,8 +289,7 @@ public class Application extends Controller {
         AgentsInquiry user = new AgentsInquiry();
 
         String agentid = session().get("agentlog");
-
-        user.approved =ApprovedAgents.approved.where().eq("applicant_id",agentid).findUnique();
+        user.agents =AgentsAccounts.FindAgent.where().eq("id",agentid).findUnique() ;
         user.message =signupForm.field("message").value();
         user.save();
         flash("success"," Your message was sent, thanks " );

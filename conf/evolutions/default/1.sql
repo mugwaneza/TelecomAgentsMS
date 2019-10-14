@@ -48,7 +48,7 @@ create table agents (
 
 create table inquiry (
   id                        bigint auto_increment not null,
-  approved_id               bigint,
+  agents_id                 bigint,
   admin_id                  bigint,
   message                   varchar(255),
   reply                     varchar(255),
@@ -112,8 +112,8 @@ alter table applicant add constraint fk_applicant_sector_3 foreign key (sector_i
 create index ix_applicant_sector_3 on applicant (sector_id);
 alter table applicant add constraint fk_applicant_cell_4 foreign key (cell_id) references cell (id) on delete restrict on update restrict;
 create index ix_applicant_cell_4 on applicant (cell_id);
-alter table inquiry add constraint fk_inquiry_approved_5 foreign key (approved_id) references approved_agents (id) on delete restrict on update restrict;
-create index ix_inquiry_approved_5 on inquiry (approved_id);
+alter table inquiry add constraint fk_inquiry_agents_5 foreign key (agents_id) references agents (id) on delete restrict on update restrict;
+create index ix_inquiry_agents_5 on inquiry (agents_id);
 alter table inquiry add constraint fk_inquiry_admin_6 foreign key (admin_id) references admin (id) on delete restrict on update restrict;
 create index ix_inquiry_admin_6 on inquiry (admin_id);
 alter table approved_agents add constraint fk_approved_agents_applicant_7 foreign key (applicant_id) references applicant (id) on delete restrict on update restrict;

@@ -22,11 +22,11 @@
                       @if(ApprovedAgents.FindChatSender !=null && !ApprovedAgents.FindChatSender.isEmpty()){
                                         @for(sender <- ApprovedAgents.FindChatSender() ) {
 
-                                       <a href="@routes.AdminDashboard.ChatDetails(id)@sender.approved.id" class="mylink" >
-                                 <input type="hidden" value="@sender.approved.id" id="link">
+                                       <a href="@routes.AdminDashboard.ChatDetails(id)@sender.agents.id" class="mylink" >
+                                 <input type="hidden" value="@sender.agents.id" id="link">
                          <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action list-group-item-default py-2"  >
-                                                 @sender.approved.applicant.firstname <br>
-                         <span class="badge badge-success "> Telecom company : @sender.approved.applicant.company</span>
+                                                 @sender.agents.fullname <br>
+@*                         <span class="badge badge-success "> Telecom company : @sender.agents.applicant.company</span>*@
 
 
 

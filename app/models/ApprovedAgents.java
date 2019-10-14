@@ -52,9 +52,9 @@ public class ApprovedAgents extends Model {
 
     // summary list of inquiry sender in admin
     public static  List<AgentsInquiry> FindChatSender(){
-//        List<AgentsInquiry> rows =Ebean.createSqlQuery("SELECT IFNULL(COUNT(distinct t.approved_id),0) as count FROM inquiry t WHERE  t.reply_status=:t.reply_status ").setParameter("reply_status", false).findList();
+//        List<AgentsInquiry> rows =Ebean.createSqlQuery("SELECT IFNULL(COUNT(distinct t.agents_id),0) as count FROM inquiry t WHERE  t.reply_status=:t.reply_status ").setParameter("reply_status", false).findList();
 
-        return  AgentsInquiry.InquiryFinder.where("approved_id IS NOT NULL GROUP BY approved_id order by id desc ").findList();
+        return  AgentsInquiry.InquiryFinder.where("agents_id IS NOT NULL GROUP BY agents_id order by id desc ").findList();
     }
 
 

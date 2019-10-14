@@ -21,7 +21,7 @@ public class AgentsInquiry  extends Model {
     public Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    public ApprovedAgents approved ;
+    public AgentsAccounts agents ;
 
     @ManyToOne(cascade = CascadeType.ALL)
     public AdminAccount admin ;
@@ -53,7 +53,7 @@ public class AgentsInquiry  extends Model {
     public static List<AgentsInquiry> FindAgentChat(String agentid)
     {
         List<AgentsInquiry> agentinq;
-        agentinq = AgentsInquiry.InquiryFinder.where().eq("approved_id",agentid).orderBy("id desc").findList();
+        agentinq = AgentsInquiry.InquiryFinder.where().eq("agents_id",agentid).orderBy("id desc").findList();
 
         return agentinq;
     }
@@ -63,7 +63,7 @@ public class AgentsInquiry  extends Model {
     public static List<AgentsInquiry> agentChat(String id)
     {
         List<AgentsInquiry> agentc ;
-        agentc = InquiryFinder.where().eq("approved_id", id).findList();
+        agentc = InquiryFinder.where().eq("agents_id", id).findList();
         return  agentc;
     }
 
@@ -71,7 +71,7 @@ public class AgentsInquiry  extends Model {
 
         try {
 
-         return  InquiryFinder.where("approved_id IS NOT NULL AND reply_status=false GROUP BY approved_id ").findRowCount();
+         return  InquiryFinder.where("agents_id IS NOT NULL AND reply_status=false GROUP BY agents_id ").findRowCount();
 
         }
         catch (Exception  e) {
